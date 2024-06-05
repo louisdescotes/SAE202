@@ -23,9 +23,9 @@
                 echo '<input type="hidden" name="idUser" value="'.$rep['idUser'].'">';
                 echo '<input type="text" name="nomUser" value="'.$rep['nomUser'].'">';
                 echo '<input type="text" name="prenomUser" value="'.$rep['prenomUser'].'">';
-                echo '<input type="text" name="emailUser" value="'.$rep['emailUser'].'">';
-                echo '<input type="text" name="mdpUser" value="'.$rep['mdpUser'].'">';
-                echo '<input type="text" name="photoUser" value="'.$rep['photoUser'].'">';
+                echo '<input type="email" name="emailUser" value="'.$rep['emailUser'].'">';
+                echo '<input type="password" name="mdpUser" value="'.$rep['mdpUser'].'">';
+                echo '<input type="file" name="photoUser" value="'.$rep['photoUser'].'">';
                 echo '<input type="submit" value="modifier">';
                 echo '</form>';
                 

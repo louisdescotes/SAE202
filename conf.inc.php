@@ -1,4 +1,10 @@
 <?php
-    $mabd = new PDO('mysql:host=localhost;dbname=juntea;charset=UTF8;', 'mmi23b06', '123');
-    $mabd->query('SET NAMES utf8;');
+try {
+    $db = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} 
+catch(PDOException $e) {
+    echo 'Erreur de connexion:' . $e->getMessage();
+}
+
 ?>

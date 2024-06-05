@@ -3,7 +3,7 @@ require_once('../header.inc.php');
 ?>
 
 <p>Formulaire d'inscription</p>
-<form action="/sae202/admin/User/validation_userInscription.php" method="post">
+<form action="/sae202/admin/User/validationInscriptionUser.php" method="post">
     <input type="text" name="nomUser" placeholder="nom">
     <input type="text" name="prenomUser" placeholder="prenom">
     <input type="text" name="emailUser" placeholder="email">

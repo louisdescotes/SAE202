@@ -2,14 +2,7 @@
     /**
      * Connexion à la base de données
      */
-    try {
-    $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } 
-    catch(PDOException $e) {
-    echo 'Erreur de connexion:' . $e->getMessage();
-    }
-
+    require_once('conf.inc.php');
 
     require_once('header.inc.php');
 
@@ -20,7 +13,7 @@
     $rep = $req->fetch();
 
     echo '<h3>Table USER</h3>';
-    require_once('../sae202/admin/User/userInscription.php');
+    require_once('../sae202/admin/User/inscriptionUser.php');
     echo '<table>';
     echo '<tr>';
     echo '<th>idUser</th>';
@@ -47,6 +40,9 @@
     /**
      * Affichage des données de la table PARCELLE
      */
+    echo '<h3>Table PARCELLE</h3>';
+    require_once('../sae202/admin/Parcelle/inscriptionParcelle.php');
+     
     $req = $db->query("SELECT * FROM PARCELLE;");
     $rep = $req->fetch();
     echo '<h3>Table PARCELLE</h3>';
@@ -71,6 +67,8 @@
         echo '<td>'.$rep['CPParcelle'].'</td>';
         echo '<td>'.$rep['adresseParcelle'].'</td>';
         echo '<td>'.$rep['_id_user'].'</td>';
+        echo '<td><a href="/sae202/admin/parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/sae202/admin/parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
     echo '</tr>';
     }
     echo '</table>';
