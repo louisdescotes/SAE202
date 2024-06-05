@@ -3,6 +3,7 @@ session_start();
 ?>
 <nav>
     <a href="/sae202/index.php">Accueil</a>
+    <a href="/sae202/Parcelle/parcelleList.php">Parcelle</a>
     <a href="/sae202/User/userConnexion.php">Connexion</a>
     <a href="/sae202/User/userInscription.php">Inscription</a>
     <a href="/sae202/admin.php">Admin</a>
