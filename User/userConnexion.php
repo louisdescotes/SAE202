@@ -1,10 +1,10 @@
 <?php
+require_once('../conf.inc.php');
 require_once('../header.inc.php');
 ?>
+
 <p>Formulaire de connexion</p>
 <?php 
-    require_once('../conf.inc.php');
-
     if(isset($_POST['emailUser']) && isset($_POST['mdpUser'])) {
         $emailUser = $_POST['emailUser'];
         $mdpUser = $_POST['mdpUser'];
@@ -15,6 +15,7 @@ require_once('../header.inc.php');
             $rep = $req->fetch();
     
             if($rep !== false) {
+                $_SESSION['id'] = $rep['idUser'];
                 $_SESSION['nom'] = $rep['nomUser'];
                 $_SESSION['prenom'] = $rep['prenomUser'];
                 header('Location: /sae202/index.php');
@@ -25,6 +26,9 @@ require_once('../header.inc.php');
         }
     }
 ?>
+
+<?php if (!empty($error)) echo '<p>' . htmlspecialchars($error) . '</p>'; ?>
+
 
 <form action="" method="post">
     <input type="text" name="emailUser" placeholder="email">
