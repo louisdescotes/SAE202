@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule validation_userInscription /var/www/sae202/admin/User/validation_userInscription.php
+RewriteRule index /var/www/sae202/index.php
