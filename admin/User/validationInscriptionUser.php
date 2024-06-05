@@ -1,12 +1,9 @@
 <?php
 
-    $nomUser = htmlspecialchars($_POST['nomUser']);
-    $prenomUser = htmlspecialchars($_POST['prenomUser']);
-    $emailUser = htmlspecialchars($_POST['emailUser']);
-    $mdpUser = htmlspecialchars($_POST['mdpUser']);
-    $photoUser = $_POST['photoUser'] ?? 'default.jpg';
-
-    echo $nomUser, $prenomUser, $emailUser, $mdpUser, $photoUser;
+    $nomUser = htmlspecialchars($_POST['name']);
+    $prenomUser = htmlspecialchars($_POST['forname']);
+    $emailUser = htmlspecialchars($_POST['email']);
+    $mdpUser = htmlspecialchars($_POST['password']);
 
     try {
         $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
@@ -16,12 +13,11 @@
         echo 'Erreur de connexion:' . $e->getMessage();
     }
     
-    $req = $db->query('INSERT INTO USER(nomUser, prenomUser, emailUser, mdpUser, photoUser) 
+    $req = $db->query('INSERT INTO USER(name, forname, email, password) 
     VALUES ("'.$nomUser.'",
             "'.$prenomUser.'",
             "'.$emailUser.'",
-            "'.$mdpUser.'",
-            "'.$photoUser.'")'
+            "'.$mdpUser.'")'
         );  
     header('Location: /sae202/index.php');
 

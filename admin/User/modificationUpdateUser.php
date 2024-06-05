@@ -1,10 +1,9 @@
 <?php
 $user_id = $_POST['idUser'];
-$user_nom = $_POST['nomUser'];
-$user_prenom = $_POST['prenomUser'];
-$user_email = $_POST['emailUser'];
-$user_mdp = $_POST['mdpUser'];
-$user_photo = $_POST['photoUser'];
+$user_nom = $_POST['name'];
+$user_prenom = $_POST['forname'];
+$user_email = $_POST['email'];
+$user_mdp = $_POST['password'];
 
 if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($user_mdp)) {
     try {
@@ -15,7 +14,7 @@ if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($u
         echo 'Erreur de connexion:' . $e->getMessage();
     }
     
-    $req = $db->query('UPDATE USER SET nomUser = "'.$user_nom.'", prenomUser = "'.$user_prenom.'", emailUser = "'.$user_email.'", mdpUser = "'.$user_mdp.'", photoUser = "'.$user_photo.'" WHERE idUser = '.$user_id.';');  
+    $req = $db->query('UPDATE USER SET name = "'.$user_nom.'", forname = "'.$user_prenom.'", email = "'.$user_email.'", password = "'.$user_mdp.'" WHERE idUser = '.$user_id.';');  
     header('Location: /sae202/admin.php');
 }
 else {

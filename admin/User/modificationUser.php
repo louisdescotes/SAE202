@@ -14,18 +14,17 @@
     if (isset($_GET['num'])) {
         $user_modifcation = $_GET['num'];
         try {
-            $req = $db->prepare('SELECT * FROM USER WHERE idUSer = :user_modifcation');
+            $req = $db->prepare('SELECT * FROM USER WHERE idUser = :user_modifcation');
             $req->bindParam(':user_modifcation', $user_modifcation, PDO::PARAM_INT);
             
             if ($req->execute()) {
                 $rep = $req->fetch();
                 echo '<form action="/sae202/admin/User/modificationUpdateUser.php" method="post">';
                 echo '<input type="hidden" name="idUser" value="'.$rep['idUser'].'">';
-                echo '<input type="text" name="nomUser" value="'.$rep['nomUser'].'">';
-                echo '<input type="text" name="prenomUser" value="'.$rep['prenomUser'].'">';
-                echo '<input type="email" name="emailUser" value="'.$rep['emailUser'].'">';
-                echo '<input type="password" name="mdpUser" value="'.$rep['mdpUser'].'">';
-                echo '<input type="file" name="photoUser" value="'.$rep['photoUser'].'">';
+                echo '<input type="text" name="name" value="'.$rep['name'].'">';
+                echo '<input type="text" name="forname" value="'.$rep['forname'].'">';
+                echo '<input type="email" name="email" value="'.$rep['email'].'">';
+                echo '<input type="password" name="password" value="'.$rep['password'].'">';
                 echo '<input type="submit" value="modifier">';
                 echo '</form>';
                 

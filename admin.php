@@ -3,34 +3,29 @@
      * Connexion à la base de données
      */
     require_once('conf.inc.php');
-
     require_once('header.inc.php');
 
     /**
      * Affichage des données de la table USER
      */
     $req = $db->query("SELECT * FROM USER;");
-    $rep = $req->fetch();
-
     echo '<h3>Table USER</h3>';
     require_once('../sae202/admin/User/inscriptionUser.php');
     echo '<table>';
     echo '<tr>';
     echo '<th>idUser</th>';
-    echo '<th>nomUser</th>';
-    echo '<th>prenomUser</th>';
-    echo '<th>emailUser</th>';
-    echo '<th>mdpUser</th>';
-    echo '<th>photoUser</th>';
+    echo '<th>name</th>';
+    echo '<th>forname</th>';
+    echo '<th>email</th>';
+    echo '<th>password</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr>';
         echo '<td>'.$rep['idUser'].'</td>';
-        echo '<td>'.$rep['nomUser'].'</td>';
-        echo '<td>'.$rep['prenomUser'].'</td>';
-        echo '<td>'.$rep['emailUser'].'</td>';
-        echo '<td>'.$rep['mdpUser'].'</td>';
-        echo '<td>'.$rep['photoUser'].'</td>';
+        echo '<td>'.$rep['name'].'</td>';
+        echo '<td>'.$rep['forname'].'</td>';
+        echo '<td>'.$rep['email'].'</td>';
+        echo '<td>'.$rep['password'].'</td>';
         echo '<td><a href="/sae202/admin/User/deleteUser.php?num='. $rep['idUser'] . '">SUPPRIMER</a></td>';
         echo '<td><a href="/sae202/admin/User/modificationUser.php?num='. $rep['idUser'] . '">MODIFIER</a></td>';
         echo '</tr>';
@@ -44,32 +39,56 @@
     require_once('../sae202/admin/Parcelle/inscriptionParcelle.php');
      
     $req = $db->query("SELECT * FROM PARCELLE;");
-    $rep = $req->fetch();
-    echo '<h3>Table PARCELLE</h3>';
     echo '<table>';
     echo '<tr>';
     echo '<th>idParcelle</th>';
-    echo '<th>nomParcelle</th>';
-    echo '<th>nbPersonneParcelle</th>';
-    echo '<th>superficieParcelle</th>';
-    echo '<th>villeParcelle</th>';
-    echo '<th>CPParcelle</th>';
-    echo '<th>adresseParcelle</th>';
-    echo '<th>_id_user</th>';
+    echo '<th>superficie</th>';
+    echo '<th>jardinId</th>';
+    echo '<th>occupantId</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
-    echo '<tr>';
+        echo '<tr>';
         echo '<td>'.$rep['idParcelle'].'</td>';
-        echo '<td>'.$rep['nomParcelle'].'</td>';
-        echo '<td>'.$rep['nbPersonneParcelle'].'</td>';
-        echo '<td>'.$rep['superficieParcelle'].'</td>';
-        echo '<td>'.$rep['villeParcelle'].'</td>';
-        echo '<td>'.$rep['CPParcelle'].'</td>';
-        echo '<td>'.$rep['adresseParcelle'].'</td>';
-        echo '<td>'.$rep['_id_user'].'</td>';
-        echo '<td><a href="/sae202/admin/parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
-        echo '<td><a href="/sae202/admin/parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
+        echo '<td>'.$rep['superficie'].'</td>';
+        echo '<td>'.$rep['jardinId'].'</td>';
+        echo '<td>'.$rep['occupantId'].'</td>';
+        echo '<td><a href="/sae202/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/sae202/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+
+    /**
+     * Affichage des données de la table JARDIN
+     */
+    echo '<h3>Table JARDIN</h3>';
+    require_once('../sae202/admin/Jardin/inscriptionJardin.php');
+     
+    $req = $db->query("SELECT * FROM JARDIN;");
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>idJardin</th>';
+    echo '<th>name</th>';
+    echo '<th>ville</th>';
+    echo '<th>CP</th>';
+    echo '<th>adresse</th>';
+    echo '<th>taille</th>';
+    echo '<th>max</th>';
+    echo '<th>ownerId</th>';
     echo '</tr>';
+    while($rep = $req->fetch()) {
+        echo '<tr>';
+        echo '<td>'.$rep['idJardin'].'</td>'; 
+        echo '<td>'.$rep['name'].'</td>';
+        echo '<td>'.$rep['ville'].'</td>';
+        echo '<td>'.$rep['CP'].'</td>';
+        echo '<td>'.$rep['adresse'].'</td>';
+        echo '<td>'.$rep['taille'].'</td>';
+        echo '<td>'.$rep['max'].'</td>';
+        echo '<td>'.$rep['ownerId'].'</td>';
+        echo '<td><a href="/sae202/admin/Jardin/deleteJardin.php?num='. $rep['idJardin'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/sae202/admin/Jardin/modificationJardin.php?num='. $rep['idJardin'] . '">MODIFIER</a></td>';
+        echo '</tr>';
     }
     echo '</table>';
 
@@ -77,56 +96,59 @@
      * Affichage des données de la table PLANTE
      */
     $req = $db->query("SELECT * FROM PLANTE;");
-    $rep = $req->fetch();
     echo '<h3>Table Plante</h3>';
     echo '<table>';
     echo '<tr>';
     echo '<th>idPlante</th>';
-    echo '<th>nomPlante</th>';
-    echo '<th>nomLatinPlante</th>';
-    echo '<th>photoPlante</th>';
-    echo '<th>endroitPlante</th>';
-    echo '<th>terrainPlante</th>';
-    echo '<th>besoinDeauPlante</th>';
-    echo '<th>impactEnvPlante</th>';
-    echo '<th>_id_parcelle</th>';
+    echo '<th>name</th>';
+    echo '<th>typePlanteId</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr>';
         echo '<td>'.$rep['idPlante'].'</td>';
-        echo '<td>'.$rep['nomPlante'].'</td>';
-        echo '<td>'.$rep['nomLatinPlante'].'</td>';
-        echo '<td>'.$rep['photoPlante'].'</td>';
-        echo '<td>'.$rep['endroitPlante'].'</td>';
-        echo '<td>'.$rep['terrainPlante'].'</td>';
-        echo '<td>'.$rep['besoinDeauPlante'].'</td>';
-        echo '<td>'.$rep['impactEnvPlante'].'</td>';
-        echo '<td>'.$rep['_id_parcelle'].'</td>';
+        echo '<td>'.$rep['name'].'</td>';
+        echo '<td>'.$rep['typePlanteId'].'</td>';
         echo '</tr>';
     }
     echo '</table>';
 
-        /**
+    /**
      * Affichage des données de la table TYPE_PLANTE
      */
     $req = $db->query("SELECT * FROM TYPE_PLANTE;");
-    $rep = $req->fetch();
     echo '<h3>Table Type_Plante</h3>';
     echo '<table>';
     echo '<tr>';
     echo '<th>idTypePlante</th>';
-    echo '<th>nomTypePlante</th>';
-    echo '<th>origineTypePlante</th>';
-    echo '<th>_id_plante</th>';
+    echo '<th>typeName</th>';
+    echo '<th>origineName</th>'; 
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr>';
         echo '<td>'.$rep['idTypePlante'].'</td>';
-        echo '<td>'.$rep['nomTypePlante'].'</td>';
-        echo '<td>'.$rep['origineTypePlante'].'</td>';
-        echo '<td>'.$rep['_id_plante'].'</td>';
+        echo '<td>'.$rep['typeName'].'</td>';
+        echo '<td>'.$rep['origineName'].'</td>'; 
         echo '</tr>';
     }
     echo '</table>';
 
+    /**
+     * Affichage des données de la table RECETTE
+     */
+    $req = $db->query("SELECT * FROM RECETTE;");
+    echo '<h3>Table RECETTE</h3>';
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>idRecette</th>';
+    echo '<th>name</th>';
+    echo '<th>creatorId</th>';
+    echo '</tr>';
+    while($rep = $req->fetch()) {
+        echo '<tr>';
+        echo '<td>'.$rep['idRecette'].'</td>';
+        echo '<td>'.$rep['name'].'</td>';
+        echo '<td>'.$rep['creatorId'].'</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 ?>
