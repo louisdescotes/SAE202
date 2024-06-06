@@ -7,7 +7,6 @@ $userId = $_GET['idUser'];
 $parcelleId = $_GET['idJardin'];
 
 try {
-    // Requête pour récupérer les informations de la parcelle et du jardin
     $req = $db->prepare('SELECT JARDIN.name AS jardinName, JARDIN.img, USER.name, PARCELLE.superficie,USER.forname
                          FROM JARDIN
                          INNER JOIN PARCELLE ON PARCELLE.idParcelle = JARDIN.idJardin

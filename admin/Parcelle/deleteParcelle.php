@@ -18,8 +18,7 @@ if (isset($_GET['num'])) {
 
         if ($req->execute()) {
             header('Location: /sae202/admin.php');
-            exit(); // Ajout de exit() pour s'assurer que le script s'arrête après la redirection
-        } else {
+            exit(); 
             echo 'Échec de la suppression de la parcelle.';
         }
     } catch (PDOException $e) {

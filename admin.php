@@ -32,31 +32,6 @@
     }
     echo '</table>';
 
-    /**
-     * Affichage des données de la table PARCELLE
-     */
-    echo '<h3>Table PARCELLE</h3>';
-    require_once('../sae202/admin/Parcelle/inscriptionParcelle.php');
-     
-    $req = $db->query("SELECT * FROM PARCELLE;");
-    echo '<table>';
-    echo '<tr>';
-    echo '<th>idParcelle</th>';
-    echo '<th>superficie</th>';
-    echo '<th>jardinId</th>';
-    echo '<th>occupantId</th>';
-    echo '</tr>';
-    while($rep = $req->fetch()) {
-        echo '<tr>';
-        echo '<td>'.$rep['idParcelle'].'</td>';
-        echo '<td>'.$rep['superficie'].'</td>';
-        echo '<td>'.$rep['jardinId'].'</td>';
-        echo '<td>'.$rep['occupantId'].'</td>';
-        echo '<td><a href="/sae202/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
-        echo '<td><a href="/sae202/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
-        echo '</tr>';
-    }
-    echo '</table>';
 
     /**
      * Affichage des données de la table JARDIN
@@ -88,6 +63,43 @@
         echo '<td>'.$rep['ownerId'].'</td>';
         echo '<td><a href="/sae202/admin/Jardin/deleteJardin.php?num='. $rep['idJardin'] . '">SUPPRIMER</a></td>';
         echo '<td><a href="/sae202/admin/Jardin/modificationJardin.php?num='. $rep['idJardin'] . '">MODIFIER</a></td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+
+        /**
+     * Affichage des données de la table PARCELLE
+     */
+    echo '<h3>Table PARCELLE</h3>';
+    require_once('../sae202/admin/Parcelle/inscriptionParcelle.php');
+
+    $req = $db->query(" SELECT PARCELLE.idParcelle, PARCELLE.superficie, PARCELLE.jardinId, PARCELLE.occupantId,
+                                JARDIN.name AS jardinName, 
+                                USER.email AS userEmail
+                        FROM PARCELLE
+                        INNER JOIN JARDIN ON JARDIN.idJardin = PARCELLE.idParcelle
+                        INNER JOIN USER ON USER.idUser = PARCELLE.idParcelle
+;");
+
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>idParcelle</th>';
+    echo '<th>superficie</th>';
+    echo '<th>jardinId</th>';
+    echo '<th>nomJardin</th>';
+    echo '<th>occupantId</th>';
+    echo '<th>emailOccupant</th>';
+    echo '</tr>';
+    while($rep = $req->fetch()) {
+        echo '<tr>';
+        echo '<td>'.$rep['idParcelle'].'</td>';
+        echo '<td>'.$rep['superficie'].'</td>';
+        echo '<td>'.$rep['jardinId'].'</td>';
+        echo '<td>'.$rep['jardinName'].'</td>';
+        echo '<td>'.$rep['occupantId'].'</td>';
+        echo '<td>'.$rep['userEmail'].'</td>';
+        echo '<td><a href="/sae202/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/sae202/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
         echo '</tr>';
     }
     echo '</table>';

@@ -21,13 +21,9 @@
                 $rep = $req->fetch();
                 echo '<form action="/sae202/admin/Parcelle/modificationUpdateParcelle.php" method="post">';
                 echo '<input type="hidden" name="idParcelle" value="'.$rep['idParcelle'].'">';
-                echo '<input type="text" name="nomParcelle" value="'.$rep['nomParcelle'].'">';
-                echo '<input type="int" name="nbPersonneParcelle" value="'.$rep['nbPersonneParcelle'].'">';
-                echo '<input type="int" name="superficieParcelle" value="'.$rep['superficieParcelle'].'">';
-                echo '<input type="text" name="villeParcelle" value="'.$rep['villeParcelle'].'">';
-                echo '<input type="int" name="CPParcelle" value="'.$rep['CPParcelle'].'">';
-                echo '<input type="text" name="adresseParcelle" value="'.$rep['adresseParcelle'].'">';
-                echo '<input type="text" name="_id_user" value="'.$rep['_id_user'].'">';
+                echo '<input type="text" name="superficie" value="'.$rep['superficie'].'">';
+                echo '<input type="int" name="jardinId" value="'.$rep['jardinId'].'">';
+                echo '<input type="int" name="occupantId" value="'.$rep['occupantId'].'">';
                 echo '<input type="submit" value="modifier">';
                 echo '</form>';
                 

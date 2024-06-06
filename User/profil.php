@@ -15,25 +15,31 @@ if (!isset($_SESSION['id'])) {
 
 <h3>Vos parcelles</h3>
 <?php
-$req = $db->prepare('SELECT * FROM PARCELLE WHERE occupantId = :occupantId');
-$req->execute(['occupantId' => $_SESSION['id']]);
-$parcelles = $req->fetchAll();
+try {
+    $req = $db->prepare('SELECT DISTINCT PARCELLE.idParcelle, PARCELLE.superficie,
+                                JARDIN.name AS jardinName, JARDIN.img, 
+                                USER.name AS userName, USER.forname, USER.email
+                         FROM PARCELLE
+                         INNER JOIN JARDIN ON PARCELLE.jardinId = JARDIN.idJardin
+                         INNER JOIN USER ON PARCELLE.occupantId = USER.idUser
+                         WHERE PARCELLE.occupantId = :occupantId');
+                         
+    $req->bindParam(':occupantId', $_SESSION['id'], PDO::PARAM_INT);
+    $req->execute();
+    $parcelles = $req->fetchAll();
 
-foreach ($parcelles as $parcelle) {
-    echo '<p>' . htmlspecialchars($parcelle['nomParcelle']) . '</p>';
-    echo '<p>' . htmlspecialchars($parcelle['nbPersonneParcelle']) . '</p>';
-    echo '<p>' . htmlspecialchars($parcelle['superficieParcelle']) . '</p>';
-    echo '<p>' . htmlspecialchars($parcelle['villeParcelle']) . '</p>';
-    echo '<p>' . htmlspecialchars($parcelle['CPParcelle']) . '</p>';
-    echo '<p>' . htmlspecialchars($parcelle['adresseParcelle']) . '</p>';
-
-    $reqResponsable = $db->prepare('SELECT name, forname, email FROM USER WHERE idUser = :idUser');
-    $reqResponsable->execute(['idUser' => $parcelle['_id_user']]);
-    $responsable = $reqResponsable->fetch();
-
-    if ($responsable) {
-        echo '<p>Responsable: ' . htmlspecialchars($responsable['name']) . ' ' . htmlspecialchars($responsable['forname']) . ' (' . htmlspecialchars($responsable['email']) . ')</p>';
+    if ($parcelles) {
+        foreach ($parcelles as $parcelle) {
+            echo '<p>Nom du jardin : ' . htmlspecialchars($parcelle['jardinName']) . '</p>';
+            echo '<p>Superficie : ' . htmlspecialchars($parcelle['superficie']) . ' m²</p>';
+            echo '<img src="' . htmlspecialchars($parcelle['img']) . '" alt="image jardin"><br>';
+            echo '<p>Responsable : ' . htmlspecialchars($parcelle['userName']) . ' ' . htmlspecialchars($parcelle['forname']) . ' ' . htmlspecialchars($parcelle['email']) . '</p>';
+        }
+    } else {
+        echo '<span>Vous n\'avez aucune parcelle.</span>';
     }
+} catch(PDOException $e) {
+    echo 'Erreur lors de la récupération des parcelles: ' . $e->getMessage();
 }
 ?>
 
@@ -42,23 +48,23 @@ foreach ($parcelles as $parcelle) {
 try {
     $req = $db->prepare('SELECT * FROM USER WHERE idUser = :user_id');
     $req->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
-    
-    if ($req->execute()) {
-        $rep = $req->fetch();
-        echo '<form action="../sae202/admin/User/modificationUpdateUser.php" method="post"">';
-        echo '<input type="hidden" name="idUser" value="'.htmlspecialchars($rep['idUser']).'">';
-        echo '<input type="text" name="name" value="'.htmlspecialchars($rep['name']).'">';
-        echo '<input type="text" name="forname" value="'.htmlspecialchars($rep['forname']).'">';
-        echo '<input type="email" name="email" value="'.htmlspecialchars($rep['email']).'">';
-        echo '<input type="password" name="password" value="'.htmlspecialchars($rep['password']).'">';
-        echo '<input type="submit" value="modifier">';
+    $req->execute();
+    $user = $req->fetch();
+
+    if ($user) {
+        echo '<form action="../sae202/admin/User/modificationUpdateUser.php" method="post">';
+        echo '<input type="hidden" name="idUser" value="'.htmlspecialchars($user['idUser']).'">';
+        echo '<input type="text" name="name" value="'.htmlspecialchars($user['name']).'">';
+        echo '<input type="text" name="forname" value="'.htmlspecialchars($user['forname']).'">';
+        echo '<input type="email" name="email" value="'.htmlspecialchars($user['email']).'">';
+        echo '<input type="password" name="password" value="'.htmlspecialchars($user['password']).'">';
+        echo '<input type="submit" value="Modifier">';
         echo '</form>';
-        
     } else {
         echo 'Échec de l\'affichage des données de l\'utilisateur.';
     }
 } catch(PDOException $e) {
-    echo 'Erreur lors de la modification: ' . $e->getMessage();
+    echo 'Erreur lors de la récupération des informations de l\'utilisateur: ' . $e->getMessage();
 }
 ?>
 
