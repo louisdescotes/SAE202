@@ -2,26 +2,20 @@
     /**
      * Connexion à la base de données
      */
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } 
-        catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
-        }
+    require_once('../../assets/conf/conf.inc.php');
 
     
     if (isset($_GET['num'])) {
-        $parcelle_delete = $_GET['num'];
+        $jardin_delete = $_GET['num'];
     
         try {
-            $req = $db->prepare('DELETE FROM PARCELLE WHERE idParcelle = :parcelle_delete');
-            $req->bindParam(':parcelle_delete', $parcelle_delete, PDO::PARAM_INT);
+            $req = $db->prepare('DELETE FROM JARDIN WHERE idJardin = :jardin_delete');
+            $req->bindParam(':jardin_delete', $jardin_delete, PDO::PARAM_INT);
             
             if ($req->execute()) {
-                header('Location: /sae202/admin.php');
+                header('Location: /admin.php');
             } else {
-                echo 'Échec de la suppression de la parcelle.';
+                echo 'Échec de la suppression du jardin.';
             }
         } catch(PDOException $e) {
             echo 'Erreur lors de la suppression: ' . $e->getMessage();

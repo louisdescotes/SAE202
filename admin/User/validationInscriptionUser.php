@@ -5,13 +5,7 @@
     $emailUser = htmlspecialchars($_POST['email']);
     $mdpUser = htmlspecialchars($_POST['password']);
 
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } 
-    catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
-    }
+    require_once('../../assets/conf/conf.inc.php');
     
     $req = $db->query('INSERT INTO USER(name, forname, email, password) 
     VALUES ("'.$nomUser.'",
@@ -19,6 +13,6 @@
             "'.$emailUser.'",
             "'.$mdpUser.'")'
         );  
-    header('Location: /sae202/index.php');
+    header('Location: /index.php');
 
 ?>

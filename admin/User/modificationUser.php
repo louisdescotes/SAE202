@@ -2,14 +2,7 @@
     /**
      * Connexion à la base de données
      */
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } 
-        catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
-        }
-
+    require_once('../../assets/conf/conf.inc.php');
     
     if (isset($_GET['num'])) {
         $user_modifcation = $_GET['num'];
@@ -19,15 +12,18 @@
             
             if ($req->execute()) {
                 $rep = $req->fetch();
-                echo '<form action="/sae202/admin/User/modificationUpdateUser.php" method="post">';
+                echo '<form action="/admin/User/modificationUpdateUser.php" method="post">';
                 echo '<input type="hidden" name="idUser" value="'.$rep['idUser'].'">';
+                echo '<label>Name</label>'; // Correction ici
                 echo '<input type="text" name="name" value="'.$rep['name'].'">';
+                echo '<label>Forname</label>';
                 echo '<input type="text" name="forname" value="'.$rep['forname'].'">';
+                echo '<label>Email</label>';
                 echo '<input type="email" name="email" value="'.$rep['email'].'">';
+                echo '<label>Password</label>';
                 echo '<input type="password" name="password" value="'.$rep['password'].'">';
                 echo '<input type="submit" value="modifier">';
                 echo '</form>';
-                
             } else {
                 echo 'Échec de l\'affichage des données de l\'utilisateur.';
             }

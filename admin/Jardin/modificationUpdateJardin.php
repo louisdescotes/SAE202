@@ -1,29 +1,51 @@
 <?php
-$parcelle_id = $_POST['idParcelle'];
-$parcelle_nom = $_POST['nomParcelle'];
-$parcelle_nbPersonne = $_POST['nbPersonneParcelle'];
-$parcelle_surperficie = $_POST['superficieParcelle'];
-$parcelle_ville = $_POST['villeParcelle'];
-$parcelle_CP = $_POST['CPParcelle'];
-$parcelle_adresse = $_POST['adresseParcelle'];
-$_id_user = $_POST['_id_user'];
+try {
+    // Inclusion de la configuration
+    require_once('../../assets/conf/conf.inc.php');
 
-if(!empty($parcelle_id) && !empty($parcelle_nom) && !empty($parcelle_nbPersonne) && !empty($parcelle_surperficie)  && !empty($parcelle_ville)  && !empty($parcelle_CP)  && !empty($parcelle_adresse) && !empty($_id_user)) {
+    // Récupération et sécurisation des données POST
+    $idJardin = intval($_POST['idJardin']);
+    $jardin_name = htmlspecialchars($_POST['name']);
+    $jardin_ville = htmlspecialchars($_POST['ville']);
+    $jardin_CP = htmlspecialchars($_POST['CP']);
+    $jardin_adresse = htmlspecialchars($_POST['adresse']);
+    $jardin_taille = intval($_POST['taille']);
+    $jardin_max = intval($_POST['max']);
+    $jardin_img = htmlspecialchars($_POST['img']);
+    $jardin_ownerId = htmlspecialchars($_POST['ownerId']);
 
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } 
-    catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
+    // Préparation de la requête SQL
+    $stmt = $db->prepare('UPDATE JARDIN SET 
+                          name = :name, 
+                          ville = :ville, 
+                          CP = :CP, 
+                          adresse = :adresse, 
+                          taille = :taille, 
+                          max = :max, 
+                          img = :img, 
+                          ownerId = :ownerId 
+                          WHERE idJardin = :idJardin');
+
+    // Liaison des valeurs
+    $stmt->bindParam(':idJardin', $idJardin, PDO::PARAM_INT);
+    $stmt->bindParam(':name', $jardin_name);
+    $stmt->bindParam(':ville', $jardin_ville);
+    $stmt->bindParam(':CP', $jardin_CP);
+    $stmt->bindParam(':adresse', $jardin_adresse);
+    $stmt->bindParam(':taille', $jardin_taille, PDO::PARAM_INT);
+    $stmt->bindParam(':max', $jardin_max, PDO::PARAM_INT);
+    $stmt->bindParam(':img', $jardin_img);
+    $stmt->bindParam(':ownerId', $jardin_ownerId);
+
+    // Exécution de la requête avec gestion des erreurs
+    if ($stmt->execute()) {
+        header('Location: /admin.php');
+        exit();
+    } else {
+        echo "Une erreur s'est produite lors de la mise à jour des données.";
+        print_r($stmt->errorInfo()); // Affiche les informations sur l'erreur
     }
-    
-    $req = $db->query('UPDATE PARCELLE SET nomParcelle = "'.$parcelle_nom.'", nbPersonneParcelle = "'.$parcelle_nbPersonne.'", superficieParcelle = "'.$parcelle_surperficie.'", villeParcelle = "'.$parcelle_ville.'", adresseParcelle = "'.$parcelle_adresse.'", CPParcelle = "'.$parcelle_CP.'", _id_user = "'.$_id_user.'" WHERE idParcelle = '.$parcelle_id.';');  
-    header('Location: /sae202/admin.php');
+} catch (PDOException $e) {
+    echo "Erreur de connexion à la base de données : " . $e->getMessage();
 }
-else {
-    echo 'Veuillez remplir tous les champs';
-}
-
-
 ?>

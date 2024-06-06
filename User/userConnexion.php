@@ -1,6 +1,7 @@
 <?php
-require_once('../conf.inc.php');
-require_once('../header.inc.php');
+    require_once('../assets/conf/head.inc.php');
+    require_once('../assets/conf/conf.inc.php');
+    require_once('../assets/conf/header.inc.php');
 ?>
 
 <p>Formulaire de connexion</p>
@@ -37,5 +38,5 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
 </form>
 
 <?php
-require_once('../footer.inc.php');  
+require_once('../assets/conf/footer.inc.php');
 ?>

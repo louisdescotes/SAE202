@@ -1,9 +1,10 @@
 <?php
-require_once('../conf.inc.php');
-require_once('../header.inc.php');
+    require_once('../assets/conf/head.inc.php');
+    require_once('../assets/conf/conf.inc.php');
+    require_once('../assets/conf/header.inc.php');
 
 if (!isset($_SESSION['id'])) {
-    header('Location: /sae202/User/userConnexion.php');
+    header('Location: /User/userConnexion.php');
     exit();
 }
 ?>
@@ -69,5 +70,5 @@ try {
 ?>
 
 <?php
-require_once('../footer.inc.php');
+    require_once('../assets/conf/footer.inc.php');
 ?>

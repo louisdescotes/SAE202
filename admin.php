@@ -2,15 +2,16 @@
     /**
      * Connexion à la base de données
      */
-    require_once('conf.inc.php');
-    require_once('header.inc.php');
+    require_once('./assets/conf/head.inc.php');
+    require_once('./assets/conf/conf.inc.php');
+    require_once('./assets/conf/header.inc.php');
 
     /**
      * Affichage des données de la table USER
      */
     $req = $db->query("SELECT * FROM USER;");
     echo '<h3>Table USER</h3>';
-    require_once('../sae202/admin/User/inscriptionUser.php');
+    require_once('./admin/User/inscriptionUser.php');
     echo '<table>';
     echo '<tr>';
     echo '<th>idUser</th>';
@@ -26,8 +27,8 @@
         echo '<td>'.$rep['forname'].'</td>';
         echo '<td>'.$rep['email'].'</td>';
         echo '<td>'.$rep['password'].'</td>';
-        echo '<td><a href="/sae202/admin/User/deleteUser.php?num='. $rep['idUser'] . '">SUPPRIMER</a></td>';
-        echo '<td><a href="/sae202/admin/User/modificationUser.php?num='. $rep['idUser'] . '">MODIFIER</a></td>';
+        echo '<td><a href="/admin/User/deleteUser.php?num='. $rep['idUser'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/admin/User/modificationUser.php?num='. $rep['idUser'] . '">MODIFIER</a></td>';
         echo '</tr>';
     }
     echo '</table>';
@@ -37,7 +38,7 @@
      * Affichage des données de la table JARDIN
      */
     echo '<h3>Table JARDIN</h3>';
-    require_once('../sae202/admin/Jardin/inscriptionJardin.php');
+    require_once('./admin/Jardin/inscriptionJardin.php');
      
     $req = $db->query("SELECT * FROM JARDIN;");
     echo '<table>';
@@ -61,8 +62,8 @@
         echo '<td>'.$rep['taille'].'</td>';
         echo '<td>'.$rep['max'].'</td>';
         echo '<td>'.$rep['ownerId'].'</td>';
-        echo '<td><a href="/sae202/admin/Jardin/deleteJardin.php?num='. $rep['idJardin'] . '">SUPPRIMER</a></td>';
-        echo '<td><a href="/sae202/admin/Jardin/modificationJardin.php?num='. $rep['idJardin'] . '">MODIFIER</a></td>';
+        echo '<td><a href="/admin/Jardin/deleteJardin.php?num='. $rep['idJardin'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/admin/Jardin/modificationJardin.php?num='. $rep['idJardin'] . '">MODIFIER</a></td>';
         echo '</tr>';
     }
     echo '</table>';
@@ -71,7 +72,7 @@
      * Affichage des données de la table PARCELLE
      */
     echo '<h3>Table PARCELLE</h3>';
-    require_once('../sae202/admin/Parcelle/inscriptionParcelle.php');
+    require_once('./admin/Parcelle/inscriptionParcelle.php');
 
     $req = $db->query(" SELECT PARCELLE.idParcelle, PARCELLE.superficie, PARCELLE.jardinId, PARCELLE.occupantId,
                                 JARDIN.name AS jardinName, 
@@ -98,8 +99,8 @@
         echo '<td>'.$rep['jardinName'].'</td>';
         echo '<td>'.$rep['occupantId'].'</td>';
         echo '<td>'.$rep['userEmail'].'</td>';
-        echo '<td><a href="/sae202/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
-        echo '<td><a href="/sae202/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
+        echo '<td><a href="/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
+        echo '<td><a href="/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
         echo '</tr>';
     }
     echo '</table>';

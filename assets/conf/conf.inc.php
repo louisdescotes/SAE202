@@ -1,7 +1,9 @@
 <?php
-define("HOST", "localhost", false);
-define("DBNAME", "Juntea", false);
-define("USER", "mmi23h10", false);
-define("PASSWORD", "123", false);
-
+try {
+    $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} 
+catch(PDOException $e) {
+    echo 'Erreur de connexion:' . $e->getMessage();
+}
 ?>

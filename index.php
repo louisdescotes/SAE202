@@ -7,9 +7,11 @@
 </head>
 <body>
     <?php 
-    require_once('header.inc.php');
+    require_once('./assets/conf/head.inc.php');
+    require_once('./assets/conf/conf.inc.php');
+    require_once('./assets/conf/header.inc.php');
     echo("<h1>Accueil</h1>");
-    require_once('footer.inc.php');
+    require_once('./assets/conf/footer.inc.php');
     ?>
 </body>
 </html>

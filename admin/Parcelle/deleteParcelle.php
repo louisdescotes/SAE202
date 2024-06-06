@@ -2,12 +2,8 @@
 /**
  * Connexion à la base de données
  */
-try {
-    $db = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo 'Erreur de connexion: ' . $e->getMessage();
-}
+require_once('../../assets/conf/conf.inc.php');
+
 
 if (isset($_GET['num'])) {
     $parcelle_delete = $_GET['num'];
@@ -17,7 +13,7 @@ if (isset($_GET['num'])) {
         $req->bindParam(':parcelle_delete', $parcelle_delete, PDO::PARAM_INT);
 
         if ($req->execute()) {
-            header('Location: /sae202/admin.php');
+            header('Location: /admin.php');
             exit(); 
             echo 'Échec de la suppression de la parcelle.';
         }

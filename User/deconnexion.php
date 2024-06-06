@@ -5,5 +5,5 @@
     session_destroy();
 
     //on redirige l'utilisateur vers la page d'accueil
-    header('Location:  /sae202/index.php');
+    header('Location:  /index.php');
 ?>

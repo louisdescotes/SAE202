@@ -2,13 +2,8 @@
     /**
      * Connexion à la base de données
      */
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } 
-    catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
-    }
+    require_once('../../assets/conf/conf.inc.php');
+
 
     
     if (isset($_GET['num'])) {
@@ -19,7 +14,7 @@
             
             if ($req->execute()) {
                 $rep = $req->fetch();
-                echo '<form action="/sae202/admin/Parcelle/modificationUpdateParcelle.php" method="post">';
+                echo '<form action="/admin/Parcelle/modificationUpdateParcelle.php" method="post">';
                 echo '<input type="hidden" name="idParcelle" value="'.$rep['idParcelle'].'">';
                 echo '<input type="text" name="superficie" value="'.$rep['superficie'].'">';
                 echo '<input type="int" name="jardinId" value="'.$rep['jardinId'].'">';

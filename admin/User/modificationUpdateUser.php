@@ -6,16 +6,11 @@ $user_email = $_POST['email'];
 $user_mdp = $_POST['password'];
 
 if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($user_mdp)) {
-    try {
-        $db= new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'phpmyadmin', 'PASSWORD');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } 
-    catch(PDOException $e) {
-        echo 'Erreur de connexion:' . $e->getMessage();
-    }
-    
+
+    require_once('../../assets/conf/conf.inc.php');
+
     $req = $db->query('UPDATE USER SET name = "'.$user_nom.'", forname = "'.$user_prenom.'", email = "'.$user_email.'", password = "'.$user_mdp.'" WHERE idUser = '.$user_id.';');  
-    header('Location: /sae202/admin.php');
+    header('Location: /admin.php');
 }
 else {
     echo 'Veuillez remplir tous les champs';

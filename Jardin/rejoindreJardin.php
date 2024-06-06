@@ -1,6 +1,7 @@
 <?php
-require_once('../conf.inc.php');
-require_once('../header.inc.php');
+require_once('./assets/conf/head.inc.php');
+require_once('./assets/conf/conf.inc.php');
+require_once('./assets/conf/header.inc.php');
 
 // Récupération des paramètres GET
 $userId = $_GET['idUser'];

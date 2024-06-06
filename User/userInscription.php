@@ -1,9 +1,11 @@
 <?php
-require_once('../header.inc.php');
+    require_once('./assets/conf/head.inc.php');
+    require_once('./assets/conf/conf.inc.php');
+    require_once('./assets/conf/header.inc.php');
 ?>
 
 <p>Formulaire d'inscription</p>
-<form action="/sae202/admin/User/validationInscriptionUser.php" method="post">
+<form action="/admin/User/validationInscriptionUser.php" method="post">
     <input type="text" name="name" placeholder="nom">
     <input type="text" name="forname" placeholder="prenom">
     <input type="text" name="email" placeholder="email">
@@ -13,5 +15,5 @@ require_once('../header.inc.php');
 </form>
 
 <?php
-require_once('../footer.inc.php');
+require_once('./assets/conf/footer.inc.php');
 ?>
