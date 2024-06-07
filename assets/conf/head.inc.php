@@ -5,7 +5,18 @@
 
     <link rel="icon" href="/assets/img/logo.png">
 
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/tailwind.config">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            main: '#2D9148',
+            bg: '#FAFAFA',
+          },
+        }
+      }
+    }
+  </script>
+        <link rel="stylesheet" href="/assets/css/style.css">
 </head>

@@ -1,3 +1,21 @@
+DirectoryIndex admin.php
+
 RewriteEngine On
-RewriteRule validation_userInscription /var/www/sae202/admin/User/validation_userInscription.php
-RewriteRule index /var/www/sae202/index.php
+
+RewriteRule jardin_delete /var/www/sae202/admin/Jardin/deleteJardin.php
+RewriteRule jardin_inscription /var/www/sae202/admin/Jardin/inscriptionJardin.php
+RewriteRule jardin_modification /var/www/sae202/admin/Jardin/modificationJardin.php
+RewriteRule jardin_modification_update /var/www/sae202/admin/Jardin/modificationUpdateJardin.php
+RewriteRule jardin_validation_inscription /var/www/sae202/admin/Jardin/validationInscriptionJardin.php
+
+RewriteRule parcelle_delete /var/www/sae202/admin/Parcelle/deleteParcelle.php
+RewriteRule parcelle_inscription /var/www/sae202/admin/Parcelle/inscriptionParcelle.php
+RewriteRule parcelle_modification /var/www/sae202/admin/Parcelle/modificationParcelle.php
+RewriteRule parcelle_modification_update /var/www/sae202/admin/Parcelle/modificationUpdateParcelle.php
+RewriteRule parcelle_validation_inscription /var/www/sae202/admin/Parcelle/validationInscriptionParcelle.php
+
+RewriteRule user_delete /var/www/sae202/admin/User/deleteUser.php
+RewriteRule user_inscription /var/www/sae202/admin/User/inscriptionUser.php
+RewriteRule user_modification /var/www/sae202/admin/User/modificationUser.php
+RewriteRule user_modification_update /var/www/sae202/admin/User/modificationUpdateUser.php
+RewriteRule user_validation_inscription /var/www/sae202/admin/User/validationInscriptionUser.php

@@ -1,17 +1,20 @@
 <?php
-require_once('./assets/conf/head.inc.php');
-require_once('./assets/conf/conf.inc.php');
-require_once('./assets/conf/header.inc.php');
+require_once('../assets/conf/head.inc.php');
+require_once('../assets/conf/conf.inc.php');
+require_once('../assets/conf/header.inc.php');
 ?>
 
 <h2>JARDINS</h2>
 
 <?php
 try {
-    $req = $db->prepare('SELECT *, JARDIN.name AS jardinName, USER.name AS name, USER.forname AS forname, USER.email AS email 
+    $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.name AS jardinName, JARDIN.ville, JARDIN.CP, JARDIN.adresse, JARDIN.taille, JARDIN.max, JARDIN.img, USER.name AS userName, USER.forname AS userForname, USER.email AS userEmail, COUNT(PARCELLE.idParcelle) AS countParcelles
         FROM JARDIN 
-        LEFT JOIN USER 
-        ON JARDIN.ownerId = USER.idUser');
+        INNER JOIN USER 
+        ON JARDIN.ownerId = USER.idUser
+        LEFT JOIN PARCELLE
+        ON PARCELLE.jardinId = JARDIN.idJardin
+        GROUP BY JARDIN.idJardin');
     $req->execute();
     $jardins = $req->fetchAll();
 
@@ -25,12 +28,14 @@ try {
         echo '<p>' . htmlspecialchars($jardin['adresse']) . '</p>';
         echo '</div>';
         echo '<p>' . htmlspecialchars($jardin['taille']) . 'm²</p>';
-        echo '<p>' . htmlspecialchars($jardin['max']) . '</p>';
+
+        echo '<p>' . htmlspecialchars($jardin['countParcelles']) . '/' . htmlspecialchars($jardin['max']) . '</p>';
+
         echo '<div class="img">';
         echo '<p>' . htmlspecialchars($jardin['img']) . '</p>';
         echo '</div>';
-        if (!empty($jardin['name']) && !empty($jardin['forname']) && !empty($jardin['email'])) {
-            echo '<p>Responsable: ' . htmlspecialchars($jardin['name']) . ' ' . htmlspecialchars($jardin['forname']) . ' (' . htmlspecialchars($jardin['email']) . ')</p>';
+        if (!empty($jardin['userName']) && !empty($jardin['userForname']) && !empty($jardin['userEmail'])) {
+            echo '<p>Responsable: ' . htmlspecialchars($jardin['userName']) . ' ' . htmlspecialchars($jardin['userForname']) . ' (' . htmlspecialchars($jardin['userEmail']) . ')</p>';
         } else {
             echo '<p>Responsable: Inconnu</p>';
         }
@@ -50,5 +55,5 @@ try {
 ?>
 
 <?php
-require_once('../footer.inc.php');
+require_once('../assets/conf/footer.inc.php');
 ?>

@@ -1,16 +1,16 @@
 <?php
 session_start();
 ?>
-<nav class="flex center w-full text-main">
+<nav class="flex center w-ful">
     <div>
         <img src="/assets/img/logo.png" alt="">
     </div>
-    <div class="flex justify-end items-center gap-4 w-full">
+    <div class="flex justify-end items-center gap-4 w-full text-main">
         <a href="/index.php">Accueil</a>
         <a href="/Jardin/jardinList.php">Jardins</a>
         <a href="/User/userConnexion.php">Connexion</a>
         <a href="/User/userInscription.php">Inscription</a>
-        <a href="/admin.php">Admin</a>
+        <a href="/admin/admin.php">Admin</a>
 
         <?php if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id'])): ?>
             <span>

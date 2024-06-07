@@ -31,7 +31,7 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
 
 <?php if (!empty($error)) echo '<p>' . htmlspecialchars($error) . '</p>'; ?>
 
-<form action="" method="post">
+<form action="/index.php" method="post">
     <input type="text" name="email" placeholder="email">
     <input type="password" name="password" placeholder="mot de passe">
     <input type="submit" value="connexion">

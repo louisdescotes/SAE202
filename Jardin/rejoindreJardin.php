@@ -1,18 +1,16 @@
 <?php
-require_once('./assets/conf/head.inc.php');
-require_once('./assets/conf/conf.inc.php');
-require_once('./assets/conf/header.inc.php');
+require_once('../assets/conf/head.inc.php');
+require_once('../assets/conf/conf.inc.php');
+require_once('../assets/conf/header.inc.php');
 
-// Récupération des paramètres GET
 $userId = $_GET['idUser'];
 $parcelleId = $_GET['idJardin'];
 
 try {
-    $req = $db->prepare('SELECT JARDIN.name AS jardinName, JARDIN.img, USER.name, PARCELLE.superficie,USER.forname
-                         FROM JARDIN
-                         INNER JOIN PARCELLE ON PARCELLE.idParcelle = JARDIN.idJardin
-                         INNER JOIN USER ON USER.idUser = JARDIN.idJardin
-                         WHERE JARDIN.idJardin = :idJardin');
+$req = $db->prepare('SELECT JARDIN.name AS jardinName, JARDIN.img, PARCELLE.superficie
+                     FROM JARDIN
+                     INNER JOIN PARCELLE ON PARCELLE.idParcelle = JARDIN.idJardin
+                     WHERE JARDIN.idJardin = :idJardin');
     $req->bindParam(':idJardin', $parcelleId, PDO::PARAM_INT);
     $req->execute();
     $parcelle = $req->fetch();

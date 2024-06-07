@@ -1,7 +1,7 @@
 <?php
-    require_once('./assets/conf/head.inc.php');
-    require_once('./assets/conf/conf.inc.php');
-    require_once('./assets/conf/header.inc.php');
+    require_once('../assets/conf/head.inc.php');
+    require_once('../assets/conf/conf.inc.php');
+    require_once('../assets/conf/header.inc.php');
 ?>
 
 <p>Formulaire d'inscription</p>
@@ -15,5 +15,5 @@
 </form>
 
 <?php
-require_once('./assets/conf/footer.inc.php');
+require_once('../assets/conf/footer.inc.php');
 ?>
