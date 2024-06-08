@@ -9,12 +9,13 @@ if (!isset($_SESSION['id'])) {
 }
 ?>
 
-<h2>Profil</h2>
-<span>Bonjour <?php echo htmlspecialchars($_SESSION['nom'] . ' ' . $_SESSION['prenom']); ?></span>
+<p class="text-3xl">Bonjour <span class="text-main satoshi-bold"><?php echo htmlspecialchars($_SESSION['nom'] . ' ' . $_SESSION['prenom']); ?></span></p>
 
-<a href="">MES PARCELLES</a>
+<button class="button-primary" href="">MES JARDINS</button>
+<button class="button-primary" href="">MES PARCELLES</button>
+<button class="button-primary" href="">MES RECETTES</button>
+<button class="button-primary" href="">MON COMPTE</button>
 
-<h3>Vos parcelles</h3>
 <?php
 try {
     $req = $db->prepare('SELECT DISTINCT PARCELLE.idParcelle, PARCELLE.superficie,
@@ -54,12 +55,29 @@ try {
 
     if ($user) {
         echo '<form action="../sae202/admin/User/modificationUpdateUser.php" method="post">';
-        echo '<input type="hidden" name="idUser" value="'.htmlspecialchars($user['idUser']).'">';
-        echo '<input type="text" name="name" value="'.htmlspecialchars($user['name']).'">';
-        echo '<input type="text" name="forname" value="'.htmlspecialchars($user['forname']).'">';
-        echo '<input type="email" name="email" value="'.htmlspecialchars($user['email']).'">';
-        echo '<input type="password" name="password" value="'.htmlspecialchars($user['password']).'">';
-        echo '<input type="submit" value="Modifier">';
+echo '<div class="flex flex-col w-max">
+        <label for="idUser">ID Utilisateur</label>
+        <input type="hidden" name="idUser" value="'.htmlspecialchars($user['idUser']).'">
+      </div>';
+echo '<div class="flex flex-col w-max">
+        <label for="name">Nom</label>
+        <input type="text" name="name" value="'.htmlspecialchars($user['name']).'">
+      </div>';
+echo '<div class="flex flex-col w-max">
+        <label for="forname">Prénom</label>
+        <input type="text" name="forname" value="'.htmlspecialchars($user['forname']).'">
+      </div>';
+echo '<div class="flex flex-col w-max">
+        <label for="email">Email</label>
+        <input type="email" name="email" value="'.htmlspecialchars($user['email']).'">
+      </div>';
+echo '<div class="flex flex-col w-max">
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" value="'.htmlspecialchars($user['password']).'">
+      </div>';
+echo '<div class="flex flex-col w-max">
+        <input type="submit" value="Modifier">
+      </div>';
         echo '</form>';
     } else {
         echo 'Échec de l\'affichage des données de l\'utilisateur.';

@@ -13,7 +13,7 @@
             $req->bindParam(':user_delete', $user_delete, PDO::PARAM_INT);
             
             if ($req->execute()) {
-                header('Location: /admin.php');
+                header('Location: /admin/admin.php');
             } else {
                 echo 'Échec de la suppression de l\'utilisateur.';
             }

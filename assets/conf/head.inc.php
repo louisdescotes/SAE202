@@ -13,6 +13,7 @@
           colors: {
             main: '#2D9148',
             bg: '#FAFAFA',
+            grey: "D4D4D4",
           },
         }
       }

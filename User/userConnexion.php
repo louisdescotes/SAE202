@@ -20,7 +20,7 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
             $_SESSION['id'] = $rep['idUser'];
             $_SESSION['nom'] = $rep['name'];
             $_SESSION['prenom'] = $rep['forname'];
-            header('Location: /sae202/index.php');
+            header('Location: /index.php');
             exit(); 
         } else {
             echo 'Erreur de connexion';
@@ -31,11 +31,14 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
 
 <?php if (!empty($error)) echo '<p>' . htmlspecialchars($error) . '</p>'; ?>
 
-<form action="/index.php" method="post">
+<form action="" method="post">
     <input type="text" name="email" placeholder="email">
     <input type="password" name="password" placeholder="mot de passe">
     <input type="submit" value="connexion">
 </form>
+<span>Pas encore de compte ? <a href="/User/userInscription.php">Inscrivez-vous</a></span>
+
+
 
 <?php
 require_once('../assets/conf/footer.inc.php');

@@ -5,7 +5,7 @@
 ?>
 
 <p>Formulaire d'inscription</p>
-<form action="/admin/User/validationInscriptionUser.php" method="post">
+<form action="/User/validationInscription.php" method="post">
     <input type="text" name="name" placeholder="nom">
     <input type="text" name="forname" placeholder="prenom">
     <input type="text" name="email" placeholder="email">
