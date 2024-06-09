@@ -4,8 +4,8 @@
     margin: 0;
 }
 body {
+    padding-top: 11svh;
     background-color: #FAFAFA;
-
     font-family: 'Satoshi-Regular';
 }
 .button-primary {

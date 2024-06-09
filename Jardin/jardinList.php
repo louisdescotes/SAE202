@@ -18,6 +18,10 @@ try {
     $req->execute();
     $jardins = $req->fetchAll();
 
+    if (!empty($_SESSION['id'])) {
+        echo '<a class="button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
+    }
+
     echo '<div class="flex flex-col gap-8">';
     foreach ($jardins as $jardin) {
         echo '<div class="relative border-2 border-main rounded-xl overflow-hidden">';

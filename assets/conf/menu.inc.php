@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-<nav class="flex center w-ful">
+<nav class=" flex center w-ful">
     <div>
         <img src="/assets/img/logo.png" alt="">
     </div>

@@ -8,14 +8,19 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 ?>
-
+<body>
 <p class="text-3xl">Bonjour <span class="text-main satoshi-bold"><?php echo htmlspecialchars($_SESSION['nom'] . ' ' . $_SESSION['prenom']); ?></span></p>
+<div class="flex justify-between">
 
-<button class="button-primary" href="">MES JARDINS</button>
-<button class="button-primary" href="">MES PARCELLES</button>
-<button class="button-primary" href="">MES RECETTES</button>
-<button class="button-primary" href="">MON COMPTE</button>
+    <div>
+    <button class="view-button button-secondary" data-view="Jardins" data-view="Jardins" onclick="setView('Jardins')">MES JARDINS</button>
+<button class="view-button button-secondary" data-view="Parcelles" data-view="Parcelles" onclick="setView('Parcelles')">MES PARCELLES</button>
+<button class="view-button button-secondary" data-view="Recettes" data-view="Recettes" onclick="setView('Recettes')">MES RECETTES</button>
+<button class="view-button button-secondary" data-view="Compte" data-view="Compte" onclick="setView('Compte')">MON COMPTE</button>
+    </div>
+</div>
 
+<div class="view Jardins">
 <?php
 try {
     $req = $db->prepare('SELECT DISTINCT PARCELLE.idParcelle, PARCELLE.superficie,
@@ -44,8 +49,16 @@ try {
     echo 'Erreur lors de la récupération des parcelles: ' . $e->getMessage();
 }
 ?>
+</div>
 
-<h3>Votre compte</h3>
+<div class="view Parcelles">
+
+</div>
+<div class="view Recettes">
+
+</div>
+
+<div class="view Compte">
 <?php
 try {
     $req = $db->prepare('SELECT * FROM USER WHERE idUser = :user_id');
@@ -86,7 +99,11 @@ echo '<div class="flex flex-col w-max">
     echo 'Erreur lors de la récupération des informations de l\'utilisateur: ' . $e->getMessage();
 }
 ?>
+</div>
+
 
 <?php
     require_once('../assets/conf/footer.inc.php');
 ?>
+<script src="/assets/js/adminPanel.js"></script>
+</body>

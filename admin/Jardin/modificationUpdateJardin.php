@@ -39,7 +39,7 @@ try {
 
     // Exécution de la requête avec gestion des erreurs
     if ($stmt->execute()) {
-        header('Location: /admin.php');
+        header('Location: /admin/admin.php');
         exit();
     } else {
         echo "Une erreur s'est produite lors de la mise à jour des données.";

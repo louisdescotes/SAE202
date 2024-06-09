@@ -19,4 +19,13 @@ const setView = (view) => {
     });
 };
 
-setView('Users');
+let defaultView;
+if (document.querySelector('.view.Users')) {
+    defaultView = 'Users';
+} else if (document.querySelector('.view.Jardins')) {
+    defaultView = 'Jardins';
+}
+
+if (defaultView) {
+    setView(defaultView);
+}

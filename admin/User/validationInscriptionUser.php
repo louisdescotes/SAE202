@@ -13,6 +13,6 @@
             "'.$emailUser.'",
             "'.$mdpUser.'")'
         );  
-    header('Location: /index.php');
+    header('Location: /admin/admin.php.php');
 
 ?>
