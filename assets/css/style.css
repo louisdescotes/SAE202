@@ -103,3 +103,15 @@ body {
     right: 0;
     box-shadow: 150px 0px #EAE5D7;
   }
+
+  .full-show::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: grey;
+    opacity: .2;
+  }
+  .full-unshow {
+    display: none;
+  }

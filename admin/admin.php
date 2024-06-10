@@ -71,6 +71,7 @@
     echo '<th class="text-start">CP</th>';
     echo '<th class="text-start">adresse</th>';
     echo '<th class="text-start">taille</th>';
+    echo '<th class="text-start">img</th>';
     echo '<th class="text-start">max</th>';
     echo '<th class="text-start">ownerId</th>';
     echo '</tr>';
@@ -82,6 +83,7 @@
         echo '<td class="">'.$rep['CP'].'</td>';
         echo '<td class="">'.$rep['adresse'].'</td>';
         echo '<td class="">'.$rep['taille'].'</td>';
+        echo '<td class="">'.$rep['img'].'</td>';
         echo '<td class="">'.$rep['max'].'</td>';
         echo '<td class="">'.$rep['ownerId'].'</td>';
         echo '<td class=""><a class="button-primary" href="/admin/Jardin/modificationJardin.php?num='. $rep['idJardin'] . '">MODIFIER</a></td>';
@@ -242,7 +244,7 @@
         echo '<input class="hidden" type="text" id="maxJardin" name="maxJardin" value="'. $rep['maxJardin'] .'" >';
         echo '<input class="hidden" type="text" id="imgJardin" name="imgJardin" value="'. $rep['imgJardin'] .'" >';
         echo '<input class="hidden" type="text" id="_idUser" name="_idUser" value="'. $rep['_idUser'] .'">';
-        echo '<input class="" type="submit" value="Accepter">';
+        echo '<td><input class="button-primary" type="submit" value="Accepter"></td>';
         echo '</form>';
 
         echo '<form action="/Admin/Demande/reservationRefuse.php" class="button-primary" method="post">';
@@ -255,7 +257,7 @@
         echo '<input class="hidden" type="text" id="maxJardin" name="maxJardin" value="'. $rep['maxJardin'] .'" >';
         echo '<input class="hidden" type="text" id="imgJardin" name="imgJardin" value="'. $rep['imgJardin'] .'" >';
         echo '<input class="hidden" type="text" id="_idUser" name="_idUser" value="'. $rep['_idUser'] .'">';
-        echo '<input class="" type="submit" value="Refuser">';
+        echo '<td class="button"><input class="button-tercery" type="submit" value="Refuser"></td>';
         echo '</form>';
         
 

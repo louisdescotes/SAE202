@@ -25,6 +25,30 @@ if (!isset($_SESSION['id'])) {
 
 <div class="view Jardins">
 <?php
+try {                    
+    $req = $db->prepare('SELECT * FROM JARDIN WHERE ownerId = ' . $_SESSION['id']);
+    $req->execute();
+    $parcelles = $req->fetchAll();
+
+    if ($parcelles) {
+        foreach ($parcelles as $parcelle) {
+            echo '<p>Nom du jardin : ' . htmlspecialchars($parcelle['name']) . '</p>';
+            echo '<p>Ville : ' . htmlspecialchars($parcelle['ville']) . htmlspecialchars($parcelle['adresse']) . htmlspecialchars($parcelle['CP']) . ' </p>';
+            echo '<p>Taille : ' . htmlspecialchars($parcelle['taille']) . '</p>';
+            echo '<p>Max : ' . htmlspecialchars($parcelle['max']) . '</p>';
+            echo '<img src="/assets/Uploads/' . htmlspecialchars($parcelle['img']) . '" alt="image jardin"><br>';
+                }
+    } else {
+        echo '<span>Vous n\'avez aucune parcelle.</span>';
+    }
+} catch(PDOException $e) {
+    echo 'Erreur lors de la récupération des parcelles: ' . $e->getMessage();
+}
+?>
+</div>
+
+<div class="view Parcelles">
+<?php
 try {
     $req = $db->prepare('SELECT DISTINCT PARCELLE.idParcelle, PARCELLE.superficie,
                                 JARDIN.name AS jardinName, JARDIN.img, 
@@ -42,7 +66,7 @@ try {
         foreach ($parcelles as $parcelle) {
             echo '<p>Nom du jardin : ' . htmlspecialchars($parcelle['jardinName']) . '</p>';
             echo '<p>Superficie : ' . htmlspecialchars($parcelle['superficie']) . ' m²</p>';
-            echo '<img src="' . htmlspecialchars($parcelle['img']) . '" alt="image jardin"><br>';
+            echo '<img src="/assets/Uploads/' . htmlspecialchars($parcelle['img']) . '" alt="image jardin"><br>';
             echo '<p>Responsable : ' . htmlspecialchars($parcelle['userName']) . ' ' . htmlspecialchars($parcelle['forname']) . ' ' . htmlspecialchars($parcelle['email']) . '</p>';
         }
     } else {
@@ -52,10 +76,6 @@ try {
     echo 'Erreur lors de la récupération des parcelles: ' . $e->getMessage();
 }
 ?>
-</div>
-
-<div class="view Parcelles">
-
 </div>
 <div class="view Recettes">
 
