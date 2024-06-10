@@ -71,6 +71,14 @@ body {
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'Bambino-Regular';
+    src:url('../fonts/Bambino.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+
 
   .satoshi {
     font-family: 'Satoshi-Regular';
@@ -83,6 +91,9 @@ body {
   }
   .satoshi-bold {
     font-family: 'Satoshi-Bold';
+  }
+  .bambino {
+    font-family: 'Bambino-Regular';
   }
 
 
@@ -114,4 +125,24 @@ body {
   }
   .full-unshow {
     display: none;
+  }
+
+  .mobile_menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .desktop_menu {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .desktop_menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .mobile_menu {
+      display: none;
+    }
+
   }

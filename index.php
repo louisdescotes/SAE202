@@ -15,7 +15,7 @@
         <img src="/assets/Uploads/jardin1.jpg" class="border rounded-l bg-grey col-start-1 col-end-9 row-start-1 row-end-2 min-h-[35rem] object-cover w-full"></img>
     </section>
     <section class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
-        <h2 class="text-xl col-start-1 col-end-7 md:col-end-4 leading-6 tracking-normal">Le co-jardinage près de chez vous</h2>    
+        <h2 class="text-xl col-start-1 col-end-7 md:col-end-4 leading-6 tracking-normal bambino">Le co-jardinage près de chez vous</h2>    
         <p class="text-xs col-start-1 col-end-7 md:col-end-4 leading-4 tracking-wide">Le cojardinage est une nouvelle façon de jardiner, basée sur le partage et la collaboration. Ce concept innovant met en relation des personnes qui possèdent un jardin mais manquent de temps, d'énergie ou de compétences pour l'entretenir, avec des passionnés de jardinage à la recherche d'un espace pour cultiver. Ensemble, ils peuvent créer un jardin prospère et productif.<br>
         Le cojardinage repose sur le principe du partage de l'espace. Les propriétaires de jardins offrent un espace souvent inutilisé à des jardiniers enthousiastes, optimisant ainsi l'utilisation des terrains disponibles et donnant une seconde vie à des jardins en sommeil. Cette collaboration permet aux deux parties de planifier, planter, entretenir et récolter ensemble, créant un échange de connaissances et de compétences qui enrichit l'expérience de chacun. Les fruits, légumes, herbes et fleurs cultivés sont ensuite partagés entre les partenaires, assurant une distribution équitable des récoltes et une satisfaction commune.</p>
     </section>
@@ -33,7 +33,7 @@ try {
     $req->execute();
     $jardins = $req->fetchAll();
 
-    echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
+    echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 gap-5 mx-5">';
     foreach ($jardins as $jardin) {
         echo '<div class="col-span-2 ">';
             echo '<div class="bg-cream p-16">';
@@ -79,11 +79,11 @@ try {
 ?>
 
     </section>
-    <section class="grid grid-cols-2 my-2 grid-cols-8 gap-2 mx-5">
+    <section class="grid grid-cols-2 my-2 grid-cols-8 gap-2 mx-5 h-96">
         <img src="/assets/Uploads/jardin1.jpg" class="bg-grey col-start-1 col-end-5 w-full h-full object-cover"></img>
         <img src="/assets/Uploads/jardin1.jpg" class="bg-grey col-start-5 col-end-9 w-full h-full object-cover"></img>
     </section>
-    <section class="grid grid-cols-2 my-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5 mb-72">
+    <section class="grid grid-cols-2 my-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5 mb-72 h-96">
         <aside class="grid grid-cols-4 grid-rows-2 w-full col-start-1 col-end-9 gap-x-2 gap-y-2 ">
             <img src="/assets/Uploads/jardin1.jpg" class="bg-grey col-start-1 col-end-2 row-start-1 row-end-2 w-full h-full object-cover"></img>
             <img src="/assets/Uploads/jardin1.jpg" class="bg-grey col-start-2 col-end-3 row-start-1 row-end-2 w-full h-full object-cover"></img>

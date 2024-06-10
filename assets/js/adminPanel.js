@@ -6,7 +6,7 @@ const setView = (view) => {
         v.style.display = 'none';
     });
     
-    document.querySelector(`.view.${view}`).style.display = 'block';
+    document.querySelector(`.view.${view}`).style.display = 'grid';
     
     buttons.forEach((button) => {
         if (button.dataset.view === view) {
