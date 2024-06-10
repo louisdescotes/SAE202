@@ -11,6 +11,6 @@ VALUES ("'.$superficie.'",
         "'.$jardinId.'",
         "'.$occupantId.'")'
     );
-header('Location: /admin.php');
+header('Location: /admin/admin.php.php');
 
 ?>

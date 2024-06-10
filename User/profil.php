@@ -3,6 +3,9 @@
     require_once('../assets/conf/conf.inc.php');
     require_once('../assets/conf/header.inc.php');
 
+    require_once('../assets/conf/grid.inc.php');
+
+
 if (!isset($_SESSION['id'])) {
     header('Location: /User/userConnexion.php');
     exit();
@@ -101,9 +104,5 @@ echo '<div class="flex flex-col w-max">
 ?>
 </div>
 
-
-<?php
-    require_once('../assets/conf/footer.inc.php');
-?>
 <script src="/assets/js/adminPanel.js"></script>
 </body>

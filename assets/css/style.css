@@ -84,3 +84,22 @@ body {
   .satoshi-bold {
     font-family: 'Satoshi-Bold';
   }
+
+
+  #footer::before, #footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  #footer::before {
+    left: 0;
+    box-shadow: -150px 0px #EAE5D7;
+  }
+
+  #footer::after {
+    right: 0;
+    box-shadow: 150px 0px #EAE5D7;
+  }

@@ -37,9 +37,3 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
     <input type="submit" value="connexion">
 </form>
 <span>Pas encore de compte ? <a href="/User/userInscription.php">Inscrivez-vous</a></span>
-
-
-
-<?php
-require_once('../assets/conf/footer.inc.php');
-?>

@@ -15,5 +15,5 @@ $sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId)
 
 $stmt = $db->query($sql);
 
-header('Location: /admin.php');
+header('Location: /admin/admin.php.php');
 ?>
