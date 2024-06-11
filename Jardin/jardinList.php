@@ -3,7 +3,7 @@
 require_once('../assets/conf/head.inc.php');
 require_once('../assets/conf/conf.inc.php');
 require_once('../assets/conf/header.inc.php');
-require_once('../assets/conf/grid.inc.php');
+// require_once('../assets/conf/grid.inc.php');
 ?>
 
 <?php
@@ -22,6 +22,10 @@ try {
         echo '<a class="relative top-5 my-5 mx-5 button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
     }
     ?>
+    <form class="relative left-52" action="/User/resultatRechercheJardin.php" method="get">
+<input type="text" name="texte" placeholder="Nom du jardin">
+<button type="submit" >Rechercher</button>
+</form>
     <div class="flex w-full items-center h-content justify-end -mx-5 gap-2">
         <input type="checkbox" name="show" id="show" >
         <label for="show">Afficher les jardins non disponibles</label>

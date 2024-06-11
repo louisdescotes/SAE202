@@ -10,6 +10,11 @@ echo '<div class="flex flex-col w-max">
     </div>';
 
     echo '<div class="flex flex-col w-max">
+    <label for="img">img</label>
+    <input type="file" id="img" name="img" placeholder="img">
+  </div>';
+
+    echo '<div class="flex flex-col w-max">
     <label for="jardinId">jardinId</label>
     <input type="text" id="jardinId" name="jardinId" placeholder="jardinId">
   </div>';

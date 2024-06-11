@@ -3,7 +3,7 @@ require_once('../assets/conf/head.inc.php');
 require_once('../assets/conf/conf.inc.php');
 require_once('../assets/conf/header.inc.php');
 
-require_once('../assets/conf/grid.inc.php');
+// require_once('../assets/conf/grid.inc.php');
 
 
 if (!isset($_SESSION['id'])) {
@@ -117,7 +117,58 @@ if (!isset($_SESSION['id'])) {
         ?>
     </div>
     <div class="view Recettes grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+        <?php
+    try {
+        $req = $db->prepare('
+            SELECT RECETTE.name AS recetteName, RECETTE.description, RECETTE.img, RECETTE.idRecette,
+                   USER.name AS userName, USER.forname AS userForname, 
+                   GROUP_CONCAT(PLANTE.name SEPARATOR "|") AS plantes
+            FROM RECETTE
+            INNER JOIN RECETTE_PLANTE ON RECETTE.idRecette = RECETTE_PLANTE.idRecette
+            INNER JOIN PLANTE ON RECETTE_PLANTE.idPlante = PLANTE.idPlante
+            INNER JOIN USER ON RECETTE.creatorId = USER.idUser
+            WHERE RECETTE.creatorId = :userId
+            GROUP BY RECETTE.idRecette
+        ');
+        $req->bindParam(':userId', $_SESSION['id'], PDO::PARAM_INT);
+        $req->execute();
+        $recettes = $req->fetchAll(PDO::FETCH_ASSOC);
 
+        if ($recettes) {
+            foreach ($recettes as $recette) {
+                echo '<div class="col-span-2 relative mb-24">';
+                echo '<div class="bg-cream p-16">';
+                echo '<div class="object-cover w-full h-80 mb-4">';
+                echo '<img class="w-full h-full object-cover object-center" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="image recette"><br>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="flex flex-col">';
+                echo '<span>Nom: ' . htmlspecialchars($recette['recetteName']) . '</span>';
+                echo '<span>Description: ' . htmlspecialchars($recette['description']) . '</span>';
+                echo '</div>';
+                echo '<div class="flex flex-col">';
+                echo '<span>Plantes:</span>';
+                $plantes = explode('|', $recette['plantes']);
+                foreach ($plantes as $plante) {
+                    echo '<span>' . htmlspecialchars($plante) . '</span>';
+                }
+                echo '</div>';
+                echo '<div class="flex justify-between">';
+                echo '<form action="/User/supprimerRecette.php" method="POST">';
+                echo '<input type="hidden" name="num" value="' . htmlspecialchars($recette['idRecette']) . '">';
+                echo '<input class="button-tercery" type="submit" value="Supprimer">';
+                echo '</form>';
+
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<span>Vous n\'avez aucune recette.</span>';
+        }
+    } catch (PDOException $e) {
+        echo 'Erreur: ' . $e->getMessage();
+    }
+        ?>
     </div>
 
     <div class="view Compte grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">

@@ -7,7 +7,7 @@
     require_once('../assets/conf/conf.inc.php');
     require_once('../assets/conf/header.inc.php');
 
-    require_once('../assets/conf/grid.inc.php');
+    // require_once('../assets/conf/grid.inc.php');
 ?>
 <div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
     <div class="col-start-1 col-end-9 row-start-1">
@@ -145,6 +145,7 @@
     echo '<tr class="text-main">';
     echo '<th class="text-start">idPlante</th>';
     echo '<th class="text-start">name</th>';
+    echo '<th class="text-start">img</th>';
     echo '<th class="text-start">typePlanteId</th>';
     echo '<th class="text-start">jardinId</th>';
     echo '</tr>';
@@ -152,6 +153,7 @@
         echo '<tr class="h-8">';
         echo '<td class"">'.$rep['idPlante'].'</td>';
         echo '<td class"">'.$rep['name'].'</td>';
+        echo '<td class"">'.$rep['img'].'</td>';
         echo '<td class"">'.$rep['typePlanteId'].'</td>';
         echo '<td class"">'.$rep['jardinId'].'</td>';
         echo '<td class=""><a class="button-primary" href="/admin/Plante/modifierPlante.php?num='. $rep['idPlante'] . '">MODIFIER</a></td>';
