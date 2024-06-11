@@ -17,6 +17,7 @@
                 echo '<form action="/admin/Plante/modificationUpdatePlante.php" method="post">';
                 echo '<input type="hidden" name="idPlante" value="'.$rep['idPlante'].'">';
                 echo '<input type="text" name="name" value="'.$rep['name'].'">';
+                echo '<input type="file" name="img" value="'.$rep['img'].'">';
                 echo '<input type="int" name="typePlanteId" value="'.$rep['typePlanteId'].'">';
                 echo '<input type="submit" value="modifier">';
                 echo '</form>';

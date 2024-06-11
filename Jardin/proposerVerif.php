@@ -18,17 +18,16 @@ require_once('../assets/conf/conf.inc.php');
 
 if(!empty($ownerId) && !empty($name)) {
     
-    $req = $db->prepare('INSERT INTO RESERVATION (nameJardin, villeJardin, CPJardin	, adresseJardin	, tailleJardin	, maxJardin, imgJardin, _idUser) 
-    VALUES (:name, :ville, :CP, :adresse, :taille, :max, :img, :ownerId)');
-$req->bindParam(':name', $name, PDO::PARAM_STR);
-$req->bindParam(':ville', $ville, PDO::PARAM_STR);
-$req->bindParam(':CP', $CP, PDO::PARAM_STR);
-$req->bindParam(':adresse', $adresse, PDO::PARAM_STR);
-$req->bindParam(':taille', $taille, PDO::PARAM_INT);
-$req->bindParam(':max', $max, PDO::PARAM_INT);
-$req->bindParam(':img', $img, PDO::PARAM_STR);
-$req->bindParam(':ownerId', $ownerId, PDO::PARAM_INT);
-$req->execute();
+    $req = $db->prepare('INSERT INTO RESERVATION (nameJardin, villeJardin, CPJardin, adresseJardin, tailleJardin, maxJardin, imgJardin, _idUser) 
+    VALUES ("'.$name.'",
+            "'.$ville.'", 
+            "'.$CP.'", 
+            "'.$adresse.'", 
+            "'.$taille.'",
+            "'.$max.'", 
+            "'.$img.'", 
+            "'.$ownerId.'")');
+    $req->execute();
 
         header('Location: /index.php');
 }

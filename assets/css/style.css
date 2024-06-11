@@ -4,7 +4,7 @@
     margin: 0;
 }
 body {
-    padding-top: 11svh;
+    padding-top: 5svh;
     background-color: #FAFAFA;
     font-family: 'Satoshi-Regular';
 }
@@ -135,6 +135,10 @@ body {
   .desktop_menu {
     display: none;
   }
+  .img_menu {
+    background: url('../../assets/img/logo2.png') no-repeat center;
+    background-size: contain;
+  }
   @media (min-width: 768px) {
     .desktop_menu {
       display: flex;
@@ -143,6 +147,10 @@ body {
     }
     .mobile_menu {
       display: none;
+    }
+    .img_menu {
+      background: url('../../assets/img/logo.png') no-repeat center;
+      background-size: contain;
     }
 
   }

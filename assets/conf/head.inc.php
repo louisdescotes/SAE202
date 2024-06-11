@@ -20,9 +20,6 @@
           gap: {
             gutter: '20px',
           },
-          gridTemplateRows: {
-          'custom': '.2fr 1fr .2fr',
-        },
         }
       }
     }

@@ -5,13 +5,13 @@
 </head>
 <body class=" w-full">
     <?php 
-    require_once('./assets/conf/grid.inc.php');
+    // require_once('./assets/conf/grid.inc.php');
 
     require_once('./assets/conf/conf.inc.php');
     require_once('./assets/conf/header.inc.php');
 
     ?>
-    <section class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+    <section class="grid grid-cols-2 mb-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
         <img src="/assets/Uploads/jardin1.jpg" class="border rounded-l bg-grey col-start-1 col-end-9 row-start-1 row-end-2 min-h-[35rem] object-cover w-full"></img>
     </section>
     <section class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
@@ -50,7 +50,7 @@ try {
                 }
             echo '</div>';
 
-            echo '<div class="flex justify-between items-end mb-2">';
+            echo '<div class="flex flex-col items-start mb-2">';
                 echo '<p class="text-xl satoshi-bold">' . htmlspecialchars($jardin['jardinName']) . '</p>';
                 echo '<p class="text-xs satoshi-regular">' . htmlspecialchars($jardin['ville']) . ' - ' . htmlspecialchars($jardin['CP']) . ' - ' . htmlspecialchars($jardin['adresse']) . '</p>';
             echo '</div>';
