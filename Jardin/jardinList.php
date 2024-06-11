@@ -1,10 +1,10 @@
+<body>
 <?php
 require_once('../assets/conf/head.inc.php');
 require_once('../assets/conf/conf.inc.php');
 require_once('../assets/conf/header.inc.php');
+require_once('../assets/conf/grid.inc.php');
 ?>
-
-<h2>JARDINS</h2>
 
 <?php
 try {
@@ -19,49 +19,54 @@ try {
     $jardins = $req->fetchAll();
 
     if (!empty($_SESSION['id'])) {
-        echo '<a class="button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
+        echo '<a class="relative top-5 my-5 mx-5 button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
     }
-
-    echo '<div class="flex flex-col gap-8">';
+    ?>
+    <div class="flex w-full items-center h-content justify-end -mx-5 gap-2">
+        <input type="checkbox" name="show" id="show" >
+        <label for="show">Afficher les jardins non disponibles</label>
+    </div>
+    </div>
+    <?php
+    echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
     foreach ($jardins as $jardin) {
-        echo '<div class="relative border-2 border-main rounded-xl overflow-hidden">';
-
-        echo '<div class="relative overflow-hidden h-36 w-full">';
-            echo '<img class="w-full h-hull" src="/assets/Uploads/' . ($jardin['img']) . '"></img>';
-            
-            echo '<div class="absolute bottom-2 right-2 flex p-2 bg-grey bg-opacity-50 rounded-lg mix-blend-hard-light	 flex-col center items-center">';
-            if (!empty($jardin['userName']) && !empty($jardin['userForname']) && !empty($jardin['userEmail'])) {
-                echo '<p> ' . htmlspecialchars($jardin['userName']) . ' ' . htmlspecialchars($jardin['userForname']);
-                echo '<p class="satoshi-light"> ' . htmlspecialchars($jardin['userEmail']) . ' </p>';
-            } else {
-                echo '<p>Responsable: Inconnu</p>';
-            }
+        echo '<div class="parcelle-container relative col-span-2 mb-24">';
+            echo '<div class="bg-cream p-16">';
+                echo '<div class="object-cover w-full h-80 mb-4">';
+                    echo '<img class="w-full h-full object-cover object-center" src="/assets/Uploads/' . htmlspecialchars($jardin['img']) . '" alt="Image de ' . htmlspecialchars($jardin['jardinName']) . '">';
+                echo '</div>';
             echo '</div>';
-        echo '</div>';
 
-        echo '<div class="p-6 relative block">';
-        echo '<p class="satoshi-light">' . htmlspecialchars($jardin['ville']) . ' - ' . htmlspecialchars($jardin['CP']) . ' - ' . htmlspecialchars($jardin['adresse']) .'</p>';
+            echo '<div class="mb-2">';
+                if (!empty($jardin['userName']) && !empty($jardin['userForname']) && !empty($jardin['userEmail'])) {
+                    echo '<p class="flex"> ' . htmlspecialchars($jardin['userName']) . ' ' . htmlspecialchars($jardin['userForname']) . ' - ' . htmlspecialchars($jardin['userEmail']) . '</p>';
+                } else {
+                    echo '<p>Responsable: Inconnu</p>';
+                }
+            echo '</div>';
 
-        echo '<p class="text-xl text-main satoshi-medium py-2">' . htmlspecialchars($jardin['jardinName']) . '</p>';
+            echo '<div class="flex justify-between mb-2">';
+                echo '<p class="text-xl text-main satoshi-medium">' . htmlspecialchars($jardin['jardinName']) . '</p>';
+                echo '<p class="satoshi-light">' . htmlspecialchars($jardin['ville']) . ' - ' . htmlspecialchars($jardin['CP']) . ' - ' . htmlspecialchars($jardin['adresse']) . '</p>';
+            echo '</div>';
 
-        echo '<p> Parcelle disponible: ' . htmlspecialchars($jardin['countParcelles']) . '/' . htmlspecialchars($jardin['max']) . '</p>';
-        echo '<p class="pb  -4">' . htmlspecialchars($jardin['taille']) . 'm²</p>';
+            echo '<div class="flex flex-col mb-2">';
+                echo '<p>' . htmlspecialchars($jardin['taille']) . 'm²</p>';
+                echo '<p>Parcelles disponibles: ' . htmlspecialchars($jardin['countParcelles']) . '/' . htmlspecialchars($jardin['max']) . '</p>';
+            echo '</div>';
 
-
-
-
-        if (!empty($_SESSION['id'])) {
-            if ($jardin['countParcelles'] < $jardin['max'] && $jardin['ownerId'] != $_SESSION['id'] && $jardin['countParcelles'] > 0) {
-                echo '<a class="button-primary " href="rejoindreJardin.php?idJardin=' . htmlspecialchars($jardin['idJardin']) . '&idUser=' . htmlspecialchars($_SESSION['id']) . '">Rejoindre</a>';
+            if (!empty($_SESSION['id'])) {
+                if ($jardin['countParcelles'] < $jardin['max'] && $jardin['ownerId'] != $_SESSION['id'] && $jardin['countParcelles'] > 0) {
+                    echo '<a class="button-primary" href="rejoindreJardin.php?idJardin=' . htmlspecialchars($jardin['idJardin']) . '&idUser=' . htmlspecialchars($_SESSION['id']) . '">Rejoindre</a>';
+                } else {
+                    echo '<span class="parcelle-full">Parcelles pleines</span>';
+                }
             } else {
-                echo '<span>Parcelles pleines</span>';
+                echo '<span>Connectez-vous pour rejoindre une parcelle</span>';
             }
-        } else {
-            echo '<span>Connectez-vous pour rejoindre une parcelle</span>';
-        }
-        echo '</div>';
         echo '</div>';
     }
+    echo '</div>';
     echo '</div>';
 } catch (PDOException $e) {
     echo 'Erreur lors de la récupération des jardins: ' . $e->getMessage();
@@ -71,3 +76,5 @@ try {
 <?php
 require_once('../assets/conf/footer.inc.php');
 ?>
+<script src="/assets/js/jardin.js"></script>
+</body>

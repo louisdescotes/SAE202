@@ -13,8 +13,16 @@
           colors: {
             main: '#2D9148',
             bg: '#FAFAFA',
-            grey: "D4D4D4",
+            grey: "#D4D4D4",
+            red: "#FF0000",
+            cream: '#EAE5D7',
           },
+          gap: {
+            gutter: '20px',
+          },
+          gridTemplateRows: {
+          'custom': '.2fr 1fr .2fr',
+        },
         }
       }
     }

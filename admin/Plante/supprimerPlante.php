@@ -6,16 +6,16 @@
 
     
     if (isset($_GET['num'])) {
-        $user_delete = $_GET['num'];
+        $plante_delete = $_GET['num'];
     
         try {
-            $req = $db->prepare('DELETE FROM USER WHERE idUser = :user_delete');
-            $req->bindParam(':user_delete', $user_delete, PDO::PARAM_INT);
+            $req = $db->prepare('DELETE FROM PLANTE WHERE idPlante = :plante_delete');
+            $req->bindParam(':plante_delete', $plante_delete, PDO::PARAM_INT);
             
             if ($req->execute()) {
-                header('Location: /admin/admin.php/admin.php');
+                header('Location: /admin/admin.php');
             } else {
-                echo 'Échec de la suppression de l\'utilisateur.';
+                echo 'Échec de la suppression de la plante.';
             }
         } catch(PDOException $e) {
             echo 'Erreur lors de la suppression: ' . $e->getMessage();

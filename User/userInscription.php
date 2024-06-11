@@ -14,6 +14,3 @@
     <input type="submit" value="inscription">
 </form>
 
-<?php
-require_once('../assets/conf/footer.inc.php');
-?>
