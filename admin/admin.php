@@ -16,7 +16,7 @@
     <button class=" view-button button-primary" data-view="Parcelles" onclick="setView('Parcelles')">Parcelles</button>
     <button class=" view-button button-primary" data-view="Plantes" onclick="setView('Plantes')">Plantes</button>
     <button class=" view-button button-primary" data-view="Type_Plante" onclick="setView('Type_Plante')">Type Plante</button>
-    <button class=" view-button button-primary" data-view="Recettes" onclick="setView('Recettes')">Recettes</button>
+    <button class=" view-button button-primary" data-view="Recette" onclick="setView('Recette')">Recettes</button>
     </div>
     <div class="col-start-8 col-end-9 row-start-1 text-end">
     <button class=" view-button button-tercery" data-view="Demandes" onclick="setView('Demande')">Demandes</button>
@@ -146,17 +146,19 @@
     echo '<th class="text-start">typePlanteId</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
-        echo '<tr> class="h-8"';
+        echo '<tr class="h-8">';
         echo '<td class"">'.$rep['idPlante'].'</td>';
         echo '<td class"">'.$rep['name'].'</td>';
         echo '<td class"">'.$rep['typePlanteId'].'</td>';
+        echo '<td class=""><a class="button-primary" href="/admin/Plante/modifierPlante.php?num='. $rep['idPlante'] . '">MODIFIER</a></td>';
+        echo '<td class=""><a class="button-tercery" href="/admin/Plante/supprimerPlante.php?num='. $rep['idPlante'] . '">SUPPRIMER</a></td>';
         echo '</tr>';
     }
     echo '</table>';
     ?>
 </div>
 
-<div class="view Type_Plante grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Type_Plante grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-5 mx-5">
     <?php
     /**
      * Affichage des données de la table TYPE_PLANTE
@@ -173,13 +175,15 @@
         echo '<td class="">'.$rep['idTypePlante'].'</td>';
         echo '<td class="">'.$rep['typeName'].'</td>';
         echo '<td class="">'.$rep['origineName'].'</td>'; 
+        echo '<td class=""><a class="button-primary" href="/admin/TypePlante/modifierTypePLante.php?num='. $rep['idTypePlante'] . '">MODIFIER</a></td>';
+        echo '<td class=""><a class="button-tercery" href="/admin/TypePlante/supprimerTypePlante.php?num='. $rep['idTypePlante'] . '">SUPPRIMER</a></td>';
         echo '</tr>';
     }
     echo '</table>';
     ?>
 </div>
 
-<div class="view Recette grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Recette grid my-10 grid-cols-9 gap-5 mx-5">
     <?php
     /**
      * Affichage des données de la table RECETTE
@@ -196,6 +200,8 @@
         echo '<td class="">'.$rep['idRecette'].'</td>';
         echo '<td class="">'.$rep['name'].'</td>';
         echo '<td class="">'.$rep['creatorId'].'</td>';
+
+        echo '<td class=""><a class="button-tercery" href="/admin/Recette/supprimerRecette.php?num='. $rep['idRecette'] . '">SUPPRIMER</a></td>';
         echo '</tr>';
     }
     echo '</table>';
@@ -205,7 +211,7 @@
 <div class="view Demande grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
     <?php
     /**
-     * Affichage des données de la table RECETTE
+     * Affichage des données de la table RESERVATION
      */
     $req = $db->query("SELECT * FROM RESERVATION;");
     echo '<table class="col-start-1 col-end-9 w-full">';

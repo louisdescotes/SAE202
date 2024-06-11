@@ -2,13 +2,15 @@
 session_start();
 ?>
 <nav class="grid grid-cols-6 lg:grid-cols-8 gap-x-5 mx-5">
-    <div class=" flex gap-3 items-center col-start-1 col-end-4 justify-start">
+    <div class=" flex gap-3 items-center col-start-1 col-end-5 justify-start">
         <img class="img_menu" src="/assets/img/logo.png" alt="">
         <a href="/index.php">Accueil</a>
         <a href="/Jardin/jardinList.php">Jardins</a>
+        <a href="/Recette/recetteList.php">Recettes</a>
+        <a href=".php">Guide des plantes</a>
         <a href="/admin/admin.php">Admin</a>
     </div>
-        <div class="flex gap-3 items-center col-start-4 col-end-9 justify-end">
+        <div class="flex gap-3 items-center col-start-5 col-end-9 justify-end">
         <div class="desktop_menu">
         <?php 
         if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['id'])): ?>
