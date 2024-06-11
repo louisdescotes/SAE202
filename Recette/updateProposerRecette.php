@@ -28,5 +28,5 @@ foreach ($plantes as $planteId) {
     ));
 }
 
-header('Location: /admin/admin.php');
+header('Location: /Recette/recetteList.php');
 ?>

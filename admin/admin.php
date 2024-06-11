@@ -138,18 +138,22 @@
     /**
      * Affichage des données de la table PLANTE
      */
+    require_once('../admin/Plante/ajouterPlante.php');
+
     $req = $db->query("SELECT * FROM PLANTE;");
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idPlante</th>';
     echo '<th class="text-start">name</th>';
     echo '<th class="text-start">typePlanteId</th>';
+    echo '<th class="text-start">jardinId</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr class="h-8">';
         echo '<td class"">'.$rep['idPlante'].'</td>';
         echo '<td class"">'.$rep['name'].'</td>';
         echo '<td class"">'.$rep['typePlanteId'].'</td>';
+        echo '<td class"">'.$rep['jardinId'].'</td>';
         echo '<td class=""><a class="button-primary" href="/admin/Plante/modifierPlante.php?num='. $rep['idPlante'] . '">MODIFIER</a></td>';
         echo '<td class=""><a class="button-tercery" href="/admin/Plante/supprimerPlante.php?num='. $rep['idPlante'] . '">SUPPRIMER</a></td>';
         echo '</tr>';
@@ -163,6 +167,9 @@
     /**
      * Affichage des données de la table TYPE_PLANTE
      */
+
+     require_once('../admin/TypePlante/ajoutTypePlante.php');
+
     $req = $db->query("SELECT * FROM TYPE_PLANTE;");
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';

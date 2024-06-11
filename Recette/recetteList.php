@@ -35,7 +35,7 @@
             echo '<span class="cross_menu col-start-9 col-end-10 text-end">+</span>';
 
             echo '<div class="recette_menu active col-start-1 col-end-9 grid grid-cols-9 gap-5">';
-            echo '<img class="object-cover w-full col-start-1 col-end-3" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '.jpg" alt="' . htmlspecialchars($recette['recetteName']) . '">';
+            echo '<img class="object-cover w-full col-start-1 col-end-3" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="' . htmlspecialchars($recette['recetteName']) . '">';
             echo '<span class="col-start-3 col-end-6">' . htmlspecialchars($recette['description']) . '</span>';
             echo '<div class="col-start-8 col-end-10 flex flex-col">';
                 echo '<span>Plantes</span>';
