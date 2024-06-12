@@ -12,10 +12,6 @@ echo '<div class="flex flex-col w-max">
         <label for="img">Image</label>
         <input type="file" id="img" name="img" placeholder="img">
       </div>';
-echo '<div class="flex flex-col w-max">
-        <label for="jardinId">Jardin ID</label>
-        <input type="text" id="jardinId" name="jardinId" placeholder="jardinId">
-      </div>';
 echo '<div class="flex flex-col w-max button-primary pointer">
         <input type="submit" value="Ajouter">
       </div>';

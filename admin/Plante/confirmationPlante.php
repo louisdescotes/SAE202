@@ -3,7 +3,6 @@ require_once('../../assets/conf/conf.inc.php');
 
 $planteName = htmlspecialchars($_POST['name']);
 $typePlanteId = htmlspecialchars($_POST['typePlanteId']);
-$jardinId = htmlspecialchars($_POST['jardinId']);
 $image = '';
 
 if (!empty($_FILES['img']['name'])) {
@@ -23,14 +22,13 @@ if (!empty($_FILES['img']['name'])) {
     $image = $nouvelle_image;
 }
 
-$sql = 'INSERT INTO PLANTE (name, typePlanteId, jardinId, img) 
-        VALUES (:name, :typePlanteId, :jardinId, :img)';
+$sql = 'INSERT INTO PLANTE (name, typePlanteId, img) 
+        VALUES (:name, :typePlanteId, :img)';
 
 $stmt = $db->prepare($sql);
 $stmt->execute([
     ':name' => $planteName,
     ':typePlanteId' => $typePlanteId,
-    ':jardinId' => $jardinId,
     ':img' => $image
 ]);
 

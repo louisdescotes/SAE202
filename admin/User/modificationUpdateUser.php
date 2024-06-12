@@ -10,7 +10,7 @@ if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($u
     require_once('../../assets/conf/conf.inc.php');
 
     $req = $db->query('UPDATE USER SET name = "'.$user_nom.'", forname = "'.$user_prenom.'", email = "'.$user_email.'", password = "'.$user_mdp.'" WHERE idUser = '.$user_id.';');  
-    header('Location: /admin/admin.php.php');
+    header('Location: /admin/admin.php');
 }
 else {
     echo 'Veuillez remplir tous les champs';
