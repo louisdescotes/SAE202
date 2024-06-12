@@ -22,7 +22,7 @@ try {
         echo '<a class="relative top-5 my-5 mx-5 button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
     }
     ?>
-    <form class="relative left-52" action="/User/resultatRechercheJardin.php" method="get">
+    <form class="relative left-52" action="/User/resultatRechercheJardin.php" method="post">
 <input type="text" name="texte" placeholder="Nom du jardin">
 <button type="submit" >Rechercher</button>
 </form>

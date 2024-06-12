@@ -5,8 +5,8 @@ require_once('../assets/conf/header.inc.php');
 ?>
 
 <?php
-if (isset($_GET['texte']) && !empty($_GET['texte'])) {
-    $nom = htmlspecialchars($_GET['texte']);
+if (isset($_POST['texte']) && !empty($_POST['texte'])) {
+    $nom = htmlspecialchars($_POST['texte']);
     $req = $db->prepare("
     SELECT 
         PLANTE.idPlante, PLANTE.name AS planteName, PLANTE.img, 

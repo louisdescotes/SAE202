@@ -20,7 +20,7 @@ GROUP BY PLANTE.idPlante");
     $plantes = $req->fetchAll();
     echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
     echo '
-    <form class="col-start-1 col-end-8 " action="/User/resultatRecherchePlante.php" method="get">
+    <form class="col-start-1 col-end-8 " action="/User/resultatRecherchePlante.php" method="post">
 <input type="text" name="texte" placeholder="Nom de la plante">
 <button type="submit" >Rechercher</button>
     ';
