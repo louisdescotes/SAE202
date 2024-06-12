@@ -3,7 +3,7 @@ require_once('../assets/conf/head.inc.php');
 require_once('../assets/conf/conf.inc.php');
 require_once('../assets/conf/header.inc.php');
  
-echo '<form action="/Jardin/proposerVerif.php" method="post">';
+echo '<form action="/Jardin/proposerVerif.php" method="post" enctype="multipart/form-data">';
 echo '<div class="flex flex-col w-max">
         <label for="name">Nom</label>
         <input type="text" id="name" name="name" placeholder="nom">
@@ -32,6 +32,9 @@ echo '<div class="flex flex-col w-max">
         <label for="img">Image</label>
         <input type="file" id="img" name="img" placeholder="img">
       </div>';
+      echo '<div class="flex flex-col w-max">
+      <input type="hidden" id="ownerId" name="ownerId" value="'.$_SESSION['id'].'" placeholder="ownerId">
+    </div>';
 echo '<div class="flex flex-col w-max button-primary pointer">
         <input type="submit" value="ajouter">
       </div>';

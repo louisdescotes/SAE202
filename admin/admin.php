@@ -249,7 +249,7 @@
         echo '<td class="">'.$rep['imgJardin'].'</td>';
         echo '<td class="">'.$rep['_idUser'].'</td>';
 
-        echo '<form action="/Admin/Demande/reservationAccepte.php" class="button-primary" method="post">';
+        echo '<form action="/Admin/Demande/reservationAccepte.php" class="button-primary" method="post" enctype="multipart/form-data">';
         echo '<input class="hidden" type="text" id="ReservationId" name="ReservationId"  value="'. $rep['ReservationId'] .'">';
         echo '<input class="hidden" type="text" id="nameJardin" name="nameJardin"  value="'. $rep['nameJardin'] .'">';
         echo '<input class="hidden" type="text" id="villeJardin" name="villeJardin"  value="'. $rep['villeJardin'] .'">';

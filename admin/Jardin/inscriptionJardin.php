@@ -1,8 +1,8 @@
 <?php
-echo '<form action="/admin/Jardin/validationInscriptionJardin.php" method="post">';
+echo '<form action="/admin/Jardin/validationInscriptionJardin.php" method="post" enctype="multipart/form-data">';
 echo '<div class="flex flex-col w-max">
         <label for="name">Nom</label>
-        <input type="text" id="name" name="name" placeholder="nom">
+        <input type="text" id="name" name="name" placeholder="nom" >
       </div>';
 echo '<div class="flex flex-col w-max">
         <label for="ville">Ville</label>
