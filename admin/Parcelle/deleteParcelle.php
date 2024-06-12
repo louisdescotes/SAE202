@@ -13,7 +13,7 @@ if (isset($_GET['num'])) {
         $req->bindParam(':parcelle_delete', $parcelle_delete, PDO::PARAM_INT);
 
         if ($req->execute()) {
-            header('Location: /admin/admin.php.php');
+            header('Location: /admin/admin.php');
             exit(); 
             echo 'Échec de la suppression de la parcelle.';
         }

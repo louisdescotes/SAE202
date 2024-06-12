@@ -101,30 +101,21 @@
      */
     require_once('../admin/Parcelle/inscriptionParcelle.php');
 
-    $req = $db->query(" SELECT PARCELLE.idParcelle, PARCELLE.superficie, PARCELLE.jardinId, PARCELLE.occupantId,
-                                JARDIN.name AS jardinName, 
-                                USER.email AS userEmail
-                        FROM PARCELLE
-                        INNER JOIN JARDIN ON JARDIN.idJardin = PARCELLE.idParcelle
-                        INNER JOIN USER ON USER.idUser = PARCELLE.idParcelle
+    $req = $db->query(" SELECT * FROM PARCELLE
 ;");
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idParcelle</th>';
     echo '<th class="text-start">superficie</th>';
     echo '<th class="text-start">jardinId</th>';
-    echo '<th class="text-start">nomJardin</th>';
     echo '<th class="text-start">occupantId</th>';
-    echo '<th class="text-start">emailOccupant</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr class="h-8">';
         echo '<td class="">'.$rep['idParcelle'].'</td>';
         echo '<td class="">'.$rep['superficie'].'</td>';
         echo '<td class="">'.$rep['jardinId'].'</td>';
-        echo '<td class="">'.$rep['jardinName'].'</td>';
         echo '<td class="">'.$rep['occupantId'].'</td>';
-        echo '<td class="">'.$rep['userEmail'].'</td>';
         echo '<td class=""><a class="button-primary" href="/admin/Parcelle/modificationParcelle.php?num='. $rep['idParcelle'] . '">MODIFIER</a></td>';
         echo '<td class=""><a class="button-tercery" href="/admin/Parcelle/deleteParcelle.php?num='. $rep['idParcelle'] . '">SUPPRIMER</a></td>';
         echo '</tr>';

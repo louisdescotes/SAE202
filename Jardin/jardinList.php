@@ -60,7 +60,7 @@ try {
             echo '</div>';
 
             if (!empty($_SESSION['id'])) {
-                if ($jardin['countParcelles'] < $jardin['max'] && $jardin['ownerId'] != $_SESSION['id'] && $jardin['countParcelles'] > 0) {
+                if ($jardin['countParcelles'] >= $jardin['max'] && $jardin['ownerId'] != $_SESSION['id']) {
                     echo '<a class="button-primary" href="rejoindreJardin.php?idJardin=' . htmlspecialchars($jardin['idJardin']) . '&idUser=' . htmlspecialchars($_SESSION['id']) . '">Rejoindre</a>';
                 } else {
                     echo '<span class="parcelle-full">Parcelles pleines</span>';
