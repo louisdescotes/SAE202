@@ -1,4 +1,5 @@
 <?php
+
 echo '<form action="/admin/Jardin/validationInscriptionJardin.php" method="post" enctype="multipart/form-data">';
 echo '<div class="flex flex-col w-max">
         <label for="name">Nom</label>
@@ -17,7 +18,7 @@ echo '<div class="flex flex-col w-max">
         <input type="text" id="adresse" name="adresse" placeholder="adresse">
       </div>';
 echo '<div class="flex flex-col w-max">
-        <label for="taille">Taille</label>
+        <label for="taille">Taille m2</label>
         <input type="number" id="taille" name="taille" placeholder="taille">
       </div>';
 echo '<div class="flex flex-col w-max">
@@ -28,10 +29,21 @@ echo '<div class="flex flex-col w-max">
         <label for="img">Image</label>
         <input type="file" id="img" name="img" placeholder="img">
       </div>';
+
 echo '<div class="flex flex-col w-max">
-        <label for="ownerId">ID Propriétaire</label>
-        <input type="text" id="ownerId" name="ownerId" placeholder="ownerId">
-      </div>';
+        <label for="ownerId">OwnerId</label>';
+
+        $req2 = $db->prepare('SELECT JARDIN.ownerId, USER.name as userName FROM JARDIN INNER JOIN USER ON JARDIN.ownerId = USER.idUser');
+        $req2->execute();
+        $owners = $req2->fetchAll();
+
+        echo '<select id="ownerId" name="ownerId">';
+        foreach ($owners as $owner) {
+            echo '<option value="' . htmlspecialchars($owner['ownerId']) . '">' . htmlspecialchars($owner['name']) . '</option>';
+        }
+        echo '</select>';
+
+echo '</div>';
 echo '<div class="flex flex-col w-max button-primary pointer">
         <input type="submit" value="ajouter">
       </div>';

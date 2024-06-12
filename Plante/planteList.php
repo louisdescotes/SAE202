@@ -26,8 +26,8 @@ INNER JOIN TYPE_PLANTE ON PLANTE.typePlanteId = TYPE_PLANTE.idTypePlante");
     ';
     foreach ($plantes as $plante) {
         echo '<article class="border">';
-        echo '<figure class="h-full">';
-        echo '<img class="h-full" src="/assets/Uploads/' . htmlspecialchars($plante['img']) . '" alt="' . htmlspecialchars($plante['img']) . '">';
+        echo '<figure class="h-40 ">';
+        echo '<img class="h-full object-cover" src="/assets/Uploads/' . htmlspecialchars($plante['img']) . '" alt="' . htmlspecialchars($plante['img']) . '">';
         echo '</figure>';
         echo '<div class="plante-infos">';
         echo '<div class="type-plante">';

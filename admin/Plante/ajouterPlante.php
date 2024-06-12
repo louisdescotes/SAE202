@@ -5,9 +5,18 @@ echo '<div class="flex flex-col w-max">
         <input type="text" id="name" name="name" placeholder="nom">
       </div>';
 echo '<div class="flex flex-col w-max">
-        <label for="typePlanteId">Type Plante ID</label>
-        <input type="text" id="typePlanteId" name="typePlanteId" placeholder="typeIdPlante">
-      </div>';
+        <label for="typePlanteId">Type de Plante</label>';
+
+$req2 = $db->prepare('SELECT idTypePlante, typeName as typePlanteName, origineName  FROM TYPE_PLANTE');
+$req2->execute();
+$typePlantes = $req2->fetchAll();
+
+echo '<select id="typePlanteId" name="typePlanteId">';
+foreach ($typePlantes as $typePlante) {
+  echo '<option value="' . htmlspecialchars($typePlante['idTypePlante']) . '">' . htmlspecialchars($typePlante['typePlanteName'] . ' (' . $typePlante['origineName'] . ')') . '</option>';
+}
+echo '</select>';
+echo '</div>';
 echo '<div class="flex flex-col w-max">
         <label for="img">Image</label>
         <input type="file" id="img" name="img" placeholder="img">

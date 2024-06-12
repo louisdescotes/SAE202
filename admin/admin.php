@@ -29,8 +29,15 @@
     /**
      * Affichage des données de la table USER
      */
-    $req = $db->query("SELECT * FROM USER;");
     require_once('../admin/User/inscriptionUser.php');
+    
+    $req = $db->query("SELECT * FROM USER");
+    $userReq = $db->prepare('SELECT COUNT(idUser) as userCount FROM USER');
+    $userReq->execute();
+    $userCount = $userReq->fetchColumn();
+    
+    echo '<span class="row-start-2">Total de users: ' . htmlspecialchars($userCount) . '</span>';
+
 
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';
@@ -61,6 +68,13 @@
      * Affichage des données de la table JARDIN
      */
     require_once('../admin/Jardin/inscriptionJardin.php');
+
+    $req = $db->query("SELECT * FROM JARDIN");
+    $jardinReq = $db->prepare('SELECT COUNT(idJardin) as jardinCount FROM JARDIN');
+    $jardinReq->execute();
+    $jardinCount = $jardinReq->fetchColumn();
+    
+    echo '<span class="row-start-2">Total de jardins: ' . htmlspecialchars($jardinCount) . '</span>';
      
     $req = $db->query("SELECT * FROM JARDIN;");
     echo '<table class="col-start-1 col-end-9 w-full">';
@@ -101,6 +115,13 @@
      */
     require_once('../admin/Parcelle/inscriptionParcelle.php');
 
+    $req = $db->query("SELECT * FROM PARCELLE");
+    $parcelleReq = $db->prepare('SELECT COUNT(idParcelle) as parcelleCount FROM PARCELLE');
+    $parcelleReq->execute();
+    $parcelleCount = $parcelleReq->fetchColumn();
+    
+    echo '<span class="row-start-2">Total de parcelles: ' . htmlspecialchars($parcelleCount) . '</span>';
+
     $req = $db->query(" SELECT * FROM PARCELLE
 ;");
     echo '<table class="col-start-1 col-end-9 w-full">';
@@ -131,6 +152,13 @@
      */
     require_once('../admin/Plante/ajouterPlante.php');
 
+    $req = $db->query("SELECT * FROM PLANTE");
+    $planteReq = $db->prepare('SELECT COUNT(idPlante) as planteCount FROM PLANTE');
+    $planteReq->execute();
+    $planteCount = $planteReq->fetchColumn();
+    
+    echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($planteCount) . '</span>';
+
     $req = $db->query("SELECT * FROM PLANTE;");
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';
@@ -138,7 +166,6 @@
     echo '<th class="text-start">name</th>';
     echo '<th class="text-start">img</th>';
     echo '<th class="text-start">typePlanteId</th>';
-    echo '<th class="text-start">jardinId</th>';
     echo '</tr>';
     while($rep = $req->fetch()) {
         echo '<tr class="h-8">';
@@ -146,7 +173,6 @@
         echo '<td class"">'.$rep['name'].'</td>';
         echo '<td class"">'.$rep['img'].'</td>';
         echo '<td class"">'.$rep['typePlanteId'].'</td>';
-        echo '<td class"">'.$rep['jardinId'].'</td>';
         echo '<td class=""><a class="button-primary" href="/admin/Plante/modifierPlante.php?num='. $rep['idPlante'] . '">MODIFIER</a></td>';
         echo '<td class=""><a class="button-tercery" href="/admin/Plante/supprimerPlante.php?num='. $rep['idPlante'] . '">SUPPRIMER</a></td>';
         echo '</tr>';
@@ -162,6 +188,13 @@
      */
 
      require_once('../admin/TypePlante/ajoutTypePlante.php');
+
+     $req = $db->query("SELECT * FROM TYPE_PLANTE;");
+     $typePlanteReq = $db->prepare('SELECT COUNT(idTypePlante) as typePlanteCount FROM TYPE_PLANTE');
+     $typePlanteReq->execute();
+     $typePlanteCount = $typePlanteReq->fetchColumn();
+     
+     echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($typePlanteCount) . '</span>';
 
     $req = $db->query("SELECT * FROM TYPE_PLANTE;");
     echo '<table class="col-start-1 col-end-9 w-full">';
@@ -189,6 +222,12 @@
      * Affichage des données de la table RECETTE
      */
     $req = $db->query("SELECT * FROM RECETTE;");
+    $recetteReq = $db->prepare('SELECT COUNT(idRecette) as recetteCount FROM RECETTE');
+    $recetteReq->execute();
+    $recetteCount = $recetteReq->fetchColumn();
+    
+    echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($recetteCount) . '</span>';
+
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idRecette</th>';
