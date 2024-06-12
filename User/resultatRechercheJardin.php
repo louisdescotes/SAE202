@@ -30,7 +30,7 @@ $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.ownerId, JARDIN.name AS jard
 
         echo '<p class="row-start-2">Voici les résultats pour : ' . $nom . '</p>';
         echo '
-        <form class="row-start-3" action="/User/resultatRechercheJardin.php" method="get">
+        <form class="row-start-3" action="/User/resultatRechercheJardin.php" method="post">
     <input type="text" name="texte" placeholder="Nom du jardin">
     <button type="submit">Rechercher</button>
 </form>
