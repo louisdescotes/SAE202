@@ -8,14 +8,14 @@ require_once('../assets/conf/header.inc.php');
 </form>
 
 <?php
-    $req = $db->prepare("SELECT 
-    PLANTE.idPlante, PLANTE.name AS planteName, PLANTE.img, 
-    TYPE_PLANTE.typeName, TYPE_PLANTE.origineName,
-    JARDIN.name AS jardinName
+$req = $db->prepare("SELECT 
+PLANTE.idPlante, PLANTE.name AS planteName, PLANTE.img, 
+TYPE_PLANTE.typeName AS typeName, TYPE_PLANTE.origineName
 FROM PLANTE 
-INNER JOIN TYPE_PLANTE ON PLANTE.typePlanteId = TYPE_PLANTE.idTypePlante
-LEFT JOIN JARDIN ON PLANTE.jardinId = JARDIN.idJardin
-GROUP BY PLANTE.idPlante");
+INNER JOIN TYPE_PLANTE ON PLANTE.typePlanteId = TYPE_PLANTE.idTypePlante");
+
+
+
     $req->execute();
     $plantes = $req->fetchAll();
     echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
@@ -35,7 +35,6 @@ GROUP BY PLANTE.idPlante");
         echo '</div>';
         echo '<h2>Type : ' . htmlspecialchars($plante['typeName']) . '</h2>';
         echo '<h3>Origine : ' . htmlspecialchars($plante['origineName']) . '</h3>';
-        echo '<h4>Présent dans le jardin : ' . htmlspecialchars($plante['jardinName']) . '</h4>'; // Assuming 'jardinName' is the column for the garden's name
         echo '</div>';
         echo '</article>';
     }

@@ -24,14 +24,19 @@
 
     <div id="buttoncontact">
 
-    <input type="radio" id="devis" name="fav_language" value="Problème de parcelles">
-    <label class="ecriture" for="devis">Problème de parcelles</label>
-
-    <input type="radio" id="information" name="fav_language" value="Renseignement">
-    <label class="ecriture" for="information">Renseignements</label><br>
-
-    <input type="radio" id="reclamation" name="fav_language" value="Bug">
-    <label class="ecrituree" for="bug">Bug sur le site</label><br>
+    <label for="radio_choice">Préciser votre demande <span>*</span></label>
+                <div class="radio_button">
+                    <input required type="radio" id="information" name="radio" value="information">
+                    <label for="information"> Information</label>
+                </div>
+                <div class="radio_button">
+                    <input required type="radio" id="devis" name="radio" value="devis">
+                    <label for="devis"> Demande de devis</label>
+                </div>
+                <div class="radio_button">
+                    <input required type="radio" id="reclamation" name="radio" value="reclamation">
+                    <label for="reclamation"> Réclamation</label>
+                </div>
 
     </div>
 

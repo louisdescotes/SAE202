@@ -10,7 +10,7 @@ if(!empty($parcelle_id) && !empty($parcelle_superficie) && !empty($parcelle_jard
 
     
     $req = $db->query('UPDATE PARCELLE SET superficie = "'.$parcelle_superficie.'", jardinId = "'.$parcelle_jardinId.'", occupantId = "'.$parcelle_occupantId.'" WHERE idParcelle = '.$parcelle_id.';');  
-    header('Location: /admin/admin.php.php');
+    header('Location: /admin/admin.php');
 }
 else {
     echo 'Veuillez remplir tous les champs';
