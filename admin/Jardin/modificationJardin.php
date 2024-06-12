@@ -4,8 +4,6 @@
      */
     require_once('../../assets/conf/conf.inc.php');
 
-
-    
     if (isset($_GET['num'])) {
         $jardin_modifcation = $_GET['num'];
         try {
@@ -14,7 +12,7 @@
             
             if ($req->execute()) {
                 $rep = $req->fetch();
-                echo '<form action="/admin/Jardin/modificationUpdateJardin.php" method="post">';
+                echo '<form action="/admin/Jardin/modificationUpdateJardin.php" method="post" enctype="multipart/form-data">';
                 echo '<input type="hidden" name="idJardin" value="'.$rep['idJardin'].'">';
                 echo '<label for="name">Nom</label>';
                 echo '<input type="text" id="name" name="name" value="'.$rep['name'].'">';

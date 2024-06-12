@@ -26,8 +26,8 @@ GROUP BY PLANTE.idPlante");
     ';
     foreach ($plantes as $plante) {
         echo '<article class="border">';
-        echo '<figure class="plante-image">';
-        echo '<img src="/assets/Uploads/' . htmlspecialchars($plante['img']) . '" alt="' . htmlspecialchars($plante['img']) . '">';
+        echo '<figure class="h-full">';
+        echo '<img class="h-full" src="/assets/Uploads/' . htmlspecialchars($plante['img']) . '" alt="' . htmlspecialchars($plante['img']) . '">';
         echo '</figure>';
         echo '<div class="plante-infos">';
         echo '<div class="type-plante">';

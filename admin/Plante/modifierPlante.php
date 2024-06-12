@@ -14,7 +14,7 @@
             
             if ($req->execute()) {
                 $rep = $req->fetch();
-                echo '<form action="/admin/Plante/modificationUpdatePlante.php" method="post">';
+                echo '<form action="/admin/Plante/modificationUpdatePlante.php" method="post" enctype="multipart/form-data">';
                 echo '<input type="hidden" name="idPlante" value="'.$rep['idPlante'].'">';
                 echo '<input type="text" name="name" value="'.$rep['name'].'">';
                 echo '<input type="file" name="img" value="'.$rep['img'].'">';
