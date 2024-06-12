@@ -8,8 +8,8 @@ require_once('../assets/conf/header.inc.php');
 
 <?php
 try {
-    if (isset($_GET['texte']) && !empty($_GET['texte'])) {
-        $nom = htmlspecialchars($_GET['texte']);
+    if (isset($_POST['texte']) && !empty($_POST['texte'])) {
+        $nom = htmlspecialchars($_POST['texte']);
 
 $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.ownerId, JARDIN.name AS jardinName, JARDIN.ville, JARDIN.CP, JARDIN.adresse, JARDIN.taille, JARDIN.max, JARDIN.img, USER.name AS userName, USER.forname AS userForname, USER.email AS userEmail, COUNT(PARCELLE.idParcelle) AS countParcelles
             FROM JARDIN
@@ -27,11 +27,8 @@ $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.ownerId, JARDIN.name AS jard
 
 
         echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
-        if (!empty($_SESSION['id'])) {
-            echo '<a class="row-start-1 col-start-1 col-end-2 w-full button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
-        }
 
-        echo '<p class="row-start-2">Voici les résultats pour : $nom</p>';
+        echo '<p class="row-start-2">Voici les résultats pour : ' . $nom . '</p>';
         echo '
         <form class="row-start-3" action="/User/resultatRechercheJardin.php" method="get">
     <input type="text" name="texte" placeholder="Nom du jardin">
