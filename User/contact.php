@@ -1,4 +1,6 @@
 
+<body>
+
 <?php 
     require_once('../assets/conf/head.inc.php');
     require_once('../assets/conf/conf.inc.php');
@@ -46,6 +48,16 @@
     <input class="send" type="submit" value="Envoyer">
 </form>
 
+<?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+        unset($_SESSION['information']);
+    }
+    ?>
+
 <?php 
     require_once('../assets/conf/footer.inc.php');
     ?>
+            <script src="/assets/js/popupDelete.js"></script>
+
+    </body>

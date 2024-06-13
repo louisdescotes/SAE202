@@ -11,7 +11,6 @@
     ?>
     <section class=" grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
     <?php
-    try {
         $req = $db->prepare('SELECT RECETTE.name AS recetteName, RECETTE.description, RECETTE.img, 
         USER.name AS userName, USER.forname AS userForname, 
         GROUP_CONCAT(PLANTE.name SEPARATOR "|") AS plantes
@@ -54,12 +53,16 @@
             echo '</div>';
             echo '</div>';
         }
-    } catch (PDOException $e) {
-        echo 'Erreur: ' . $e->getMessage();
-    }
         ?>
         </div>
-
+        <div>
+    <?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+        unset($_SESSION['information']);
+    }
+    ?>
+</div>
 
         </section>
         <?php
@@ -67,4 +70,6 @@
         ?>
 
         <script src="/assets/js/recette.js"></script>
+        <script src="/assets/js/popupDelete.js"></script>
+
 </body>

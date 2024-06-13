@@ -21,7 +21,7 @@ echo '<div class="flex flex-col w-max">
         <input type="text" id="adresse" name="adresse" placeholder="adresse">
       </div>';
 echo '<div class="flex flex-col w-max">
-        <label for="taille">Taille</label>
+        <label for="taille">Taille m2</label>
         <input type="number" id="taille" name="taille" placeholder="taille">
       </div>';
 echo '<div class="flex flex-col w-max">

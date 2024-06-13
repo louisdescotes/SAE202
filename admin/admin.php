@@ -293,7 +293,7 @@
         echo '</form>';
 
         echo '<form action="/Admin/Demande/reservationRefuse.php" class="button-primary" method="post">';
-        echo '<input class="hidden" type="text" id="ReservationId" name="ReservationId"  value="'. $rep['ReservationId'] .'">';
+        echo '<input class="hidden" type="text" id="Res rvationId" name="ReservationId"  value="'. $rep['ReservationId'] .'">';
         echo '<input class="hidden" type="text" id="nameJardin" name="nameJardin"  value="'. $rep['nameJardin'] .'">';
         echo '<input class="hidden" type="text" id="villeJardin" name="villeJardin"  value="'. $rep['villeJardin'] .'">';
         echo '<input class="hidden" type="text" id="CPJardin" name="CPJardin" value="'. $rep['CPJardin'] .'">';
@@ -311,6 +311,14 @@
         echo '</tr>';
     }
     echo '</table>';
+    ?>
+</div>
+
+<div>
+    <?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+    }
     ?>
 </div>
 

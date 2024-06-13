@@ -1,4 +1,8 @@
 <?php
+session_start();
+$_SESSION['information'] = '';
+$affichage_retour = '';
+
 $idReservation = htmlspecialchars($_POST['ReservationId']);
 $nom = htmlspecialchars($_POST['nameJardin']);
 $ville = htmlspecialchars($_POST['villeJardin']);
@@ -11,25 +15,35 @@ $_idUser = htmlspecialchars($_POST['_idUser']);
 
 require_once('../../assets/conf/conf.inc.php');
 
-var_dump($max);
+try {
+    $sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId) 
+    VALUES ("' . $nom . '", "' . $ville . '", "' . $CP . '", "' . $adresse . '", ' . $taille . ', ' . $max . ', "' . $img . '", "' . $_idUser . '")';
+    $stmt = $db->query($sql);
 
-$sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId) 
-        VALUES ("'.$nom.'", "'.$ville.'", "'.$CP.'", "'.$adresse.'", '.$taille.', '.$max.', "'.$img.'", "'.$_idUser.'")';
-$stmt = $db->query($sql);
+    $idJardin = $db->lastInsertId();
 
-$idJardin = $db->lastInsertId();
+    for ($i = 1; $i < $max; $i++) {
+        $sql3 = 'INSERT INTO PARCELLE (superficie, jardinId) 
+         VALUES (' . $taille . ', ' . $idJardin . ')';
+        $stmt3 = $db->query($sql3);
+    }
+    $stmt3->execute();
 
-for ($i = 1; $i < $max; $i++) {
-    $sql3 = 'INSERT INTO PARCELLE (superficie, jardinId) 
-             VALUES ('.$taille.', '.$idJardin.')';
-    $stmt3 = $db->query($sql3);
+    $stmt2 = $db->prepare('DELETE FROM RESERVATION WHERE ReservationId = :idReservation');
+    $stmt2->bindParam(':idReservation', $idReservation, PDO::PARAM_INT);
+    $stmt2->execute();
+
+} catch (PDOException $e) {
+    $affichage_retour = '
+    <div> 
+        <div> 
+            <img src="../../assets/img/louis.png" alt="erreur" class="img_erreur> 
+        </div>
+        <div> 
+            <p>Erreur lors de la création du jardin</p>
+        </div>
+    <div>';
+    $_SESSION['information'] = $affichage_retour;
 }
-$stmt3->execute();
-
-$stmt2 = $db->prepare('DELETE FROM RESERVATION WHERE ReservationId = :idReservation');
-$stmt2->bindParam(':idReservation', $idReservation, PDO::PARAM_INT);
-$stmt2->execute();
-
-
 
 header('Location: /admin/admin.php');

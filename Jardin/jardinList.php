@@ -80,5 +80,13 @@ try {
 <?php
 require_once('../assets/conf/footer.inc.php');
 ?>
+    <?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+        unset($_SESSION['information']);
+    }
+    ?>
+            <script src="/assets/js/popupDelete.js"></script>
+
 <script src="/assets/js/jardin.js"></script>
 </body>

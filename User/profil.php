@@ -213,5 +213,14 @@ if (!isset($_SESSION['id'])) {
         ?>
     </div>
 
+    <div>
+    <?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+        unset($_SESSION['information']);
+    }
+    ?>
+</div>
     <script src="/assets/js/adminPanel.js"></script>
+    <script src="/assets/js/popupDelete.js"></script>
 </body>
