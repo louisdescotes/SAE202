@@ -118,8 +118,8 @@ if (!isset($_SESSION['id'])) {
     </div>
     <div class="view Recettes grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
         <?php
-    try {
-        $req = $db->prepare('
+        try {
+            $req = $db->prepare('
             SELECT RECETTE.name AS recetteName, RECETTE.description, RECETTE.img, RECETTE.idRecette,
                    USER.name AS userName, USER.forname AS userForname, 
                    GROUP_CONCAT(PLANTE.name SEPARATOR "|") AS plantes
@@ -130,44 +130,44 @@ if (!isset($_SESSION['id'])) {
             WHERE RECETTE.creatorId = :userId
             GROUP BY RECETTE.idRecette
         ');
-        $req->bindParam(':userId', $_SESSION['id'], PDO::PARAM_INT);
-        $req->execute();
-        $recettes = $req->fetchAll(PDO::FETCH_ASSOC);
+            $req->bindParam(':userId', $_SESSION['id'], PDO::PARAM_INT);
+            $req->execute();
+            $recettes = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($recettes) {
-            foreach ($recettes as $recette) {
-                echo '<div class="col-span-2 relative mb-24">';
-                echo '<div class="bg-cream p-16">';
-                echo '<div class="object-cover w-full h-80 mb-4">';
-                echo '<img class="w-full h-full object-cover object-center" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="image recette"><br>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="flex flex-col">';
-                echo '<span>Nom: ' . htmlspecialchars($recette['recetteName']) . '</span>';
-                echo '<span>Description: ' . htmlspecialchars($recette['description']) . '</span>';
-                echo '</div>';
-                echo '<div class="flex flex-col">';
-                echo '<span>Plantes:</span>';
-                $plantes = explode('|', $recette['plantes']);
-                foreach ($plantes as $plante) {
-                    echo '<span>' . htmlspecialchars($plante) . '</span>';
+            if ($recettes) {
+                foreach ($recettes as $recette) {
+                    echo '<div class="col-span-2 relative mb-24">';
+                    echo '<div class="bg-cream p-16">';
+                    echo '<div class="object-cover w-full h-80 mb-4">';
+                    echo '<img class="w-full h-full object-cover object-center" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="image recette"><br>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="flex flex-col">';
+                    echo '<span>Nom: ' . htmlspecialchars($recette['recetteName']) . '</span>';
+                    echo '<span>Description: ' . htmlspecialchars($recette['description']) . '</span>';
+                    echo '</div>';
+                    echo '<div class="flex flex-col">';
+                    echo '<span>Plantes:</span>';
+                    $plantes = explode('|', $recette['plantes']);
+                    foreach ($plantes as $plante) {
+                        echo '<span>' . htmlspecialchars($plante) . '</span>';
+                    }
+                    echo '</div>';
+                    echo '<div class="flex justify-between">';
+                    echo '<form action="/User/supprimerRecette.php" method="POST">';
+                    echo '<input type="hidden" name="num" value="' . htmlspecialchars($recette['idRecette']) . '">';
+                    echo '<input class="button-tercery" type="submit" value="Supprimer">';
+                    echo '</form>';
+
+                    echo '</div>';
+                    echo '</div>';
                 }
-                echo '</div>';
-                echo '<div class="flex justify-between">';
-                echo '<form action="/User/supprimerRecette.php" method="POST">';
-                echo '<input type="hidden" name="num" value="' . htmlspecialchars($recette['idRecette']) . '">';
-                echo '<input class="button-tercery" type="submit" value="Supprimer">';
-                echo '</form>';
-
-                echo '</div>';
-                echo '</div>';
+            } else {
+                echo '<span>Vous n\'avez aucune recette.</span>';
             }
-        } else {
-            echo '<span>Vous n\'avez aucune recette.</span>';
+        } catch (PDOException $e) {
+            echo 'Erreur: ' . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo 'Erreur: ' . $e->getMessage();
-    }
         ?>
     </div>
 
@@ -180,9 +180,10 @@ if (!isset($_SESSION['id'])) {
             $user = $req->fetch();
 
             if ($user) {
-                echo '<form class="col-start-1 col-end-8" action="../sae202/admin/User/modificationUpdateUser.php" method="post">';
+                echo '<form class="col-start-1 col-end-8" action="/User/modificationProfil.php" method="post">';
                 echo '<div class="grid grid-cols-2  sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 ">';
                 echo '<div class="flex flex-col col-start-1 col-end-4">
+                <input type="hidden" name="idUser" value="' . htmlspecialchars($user['idUser']) . '">
 <label class="text-xl text-main satoshi-medium" for="name">Nom</label>
 <input class="rounded pl-2 py-1 border border-main" type="text" name="name" value="' . htmlspecialchars($user['name']) . '">
 </div>';
