@@ -1,7 +1,6 @@
 <?php
 try {
-    require_once('../../assets/conf/conf.inc.php');
-
+    require_once('../../admin/conf.inc.php');
     $idJardin = intval($_POST['idJardin']);
     $jardin_name = htmlspecialchars($_POST['name']);
     $jardin_ville = htmlspecialchars($_POST['ville']);

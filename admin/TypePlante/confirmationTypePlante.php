@@ -1,6 +1,5 @@
 <?php
-require_once('../../assets/conf/conf.inc.php');
-
+require_once('../../admin/conf.inc.php');
 $typeName = htmlspecialchars($_POST['typeName']);
 $origineName = htmlspecialchars($_POST['origineName']);
 

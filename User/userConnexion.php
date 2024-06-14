@@ -1,11 +1,9 @@
 <?php
-    require_once('../assets/conf/head.inc.php');
-    require_once('../assets/conf/conf.inc.php');
-    require_once('../assets/conf/header.inc.php');
-?>
+require_once('../assets/conf/head.inc.php');
+require_once('../admin/conf.inc.php');
+require_once('../assets/conf/header.inc.php');
 
-<p>Formulaire de connexion</p>
-<?php 
+
 if(isset($_POST['email']) && isset($_POST['password'])) {
     $emailUser = $_POST['email'];
     $mdpUser = $_POST['password'];
@@ -16,14 +14,19 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
         $rep = $req->fetch();
 
         if($rep !== false) {
-            session_start();
             $_SESSION['id'] = $rep['idUser'];
             $_SESSION['nom'] = $rep['name'];
             $_SESSION['prenom'] = $rep['forname'];
+
+            // Vérification si admin
+            if ($emailUser == 'admin@contact.fr' && $mdpUser == 'Carotte10000') {
+                $_SESSION['admin'] = true;
+            }
+
             header('Location: /index.php');
             exit(); 
         } else {
-            echo 'Erreur de connexion';
+            $error = 'Erreur de connexion';
         }
     }
 }

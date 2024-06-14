@@ -1,6 +1,5 @@
 <?php
-require_once('../../assets/conf/conf.inc.php');
-
+require_once('../../admin/conf.inc.php');
 $planteName = htmlspecialchars($_POST['name']);
 $typePlanteId = htmlspecialchars($_POST['typePlanteId']);
 $image = '';

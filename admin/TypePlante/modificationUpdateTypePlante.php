@@ -5,8 +5,7 @@ $origineName = $_POST['origineName'];
 
 if(!empty($idTypePlante) && !empty($typeName) && !empty($origineName)) {
 
-    require_once('../../assets/conf/conf.inc.php');
-
+    require_once('../../admin/conf.inc.php');
     
     $req = $db->query('UPDATE TYPE_PLANTE SET typeName = "'.$typeName.'", origineName = "'.$origineName.'" WHERE idTypePlante = '.$idTypePlante.';');  
     header('Location: /admin/admin.php');

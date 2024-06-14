@@ -2,8 +2,7 @@
     /**
      * Connexion à la base de données
      */
-    require_once('../../assets/conf/conf.inc.php');
-
+    require_once('../../admin/conf.inc.php');
     
     if (isset($_GET['num'])) {
         $user_delete = $_GET['num'];

@@ -5,7 +5,7 @@
     $emailUser = htmlspecialchars($_POST['email']);
     $mdpUser = htmlspecialchars($_POST['password']);
 
-    require_once('../../assets/conf/conf.inc.php');
+    require_once('../../admin/conf.inc.php');
     
     $req = $db->query('INSERT INTO USER(name, forname, email, password) 
     VALUES ("'.$nomUser.'",

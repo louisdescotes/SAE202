@@ -1,5 +1,0 @@
-DirectoryIndex index.php
-
-RewriteEngine On
-
-RewriteRule /gestion /admin

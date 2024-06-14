@@ -1,6 +1,5 @@
 <?php
-require_once('../../assets/conf/conf.inc.php');
-
+require_once('../../admin/conf.inc.php');
 $superficie = htmlspecialchars($_POST['superficie']);
 $jardinId = htmlspecialchars($_POST['jardinId']);
 $occupantId = htmlspecialchars($_POST['occupantId']);

@@ -1,5 +1,5 @@
 <?php
-require_once('../assets/conf/conf.inc.php');
+    require_once('../admin/conf.inc.php');
 
 session_start();
 $_SESSION['information'] = '';
@@ -21,7 +21,7 @@ if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($u
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>    </div>
         <div class="flex items-center p-5 gap-5 bg-cream rounded-md w-fit"> 
         <div class="w-20"> 
-            <img draggable="false" src="../assets/img/estelle.png" alt="estelle"> 
+            <img draggable="false" src="../assets/img/Estelle.png" alt="estelle"> 
         </div>
             <p class="max-w-60">Votre profil a été modifié.</p>
         <div>

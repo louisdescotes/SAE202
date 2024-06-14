@@ -2,7 +2,7 @@
 $idUser = $_GET['idUser'];
 $idJardin = $_GET['idJardin'];
 
-require_once('../assets/conf/conf.inc.php');
+require_once('../admin/conf.inc.php');
 
 if (!empty($idUser) && !empty($idJardin)) {
     try {

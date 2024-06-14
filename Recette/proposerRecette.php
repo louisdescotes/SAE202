@@ -1,7 +1,7 @@
 <body>
 <?php
 require_once('../assets/conf/head.inc.php');
-require_once('../assets/conf/conf.inc.php');
+require_once('../admin/conf.inc.php');
 require_once('../assets/conf/header.inc.php');
 
 echo '<form action="/Recette/updateProposerRecette.php" method="post" enctype="multipart/form-data">';

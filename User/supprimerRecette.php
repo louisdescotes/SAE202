@@ -1,6 +1,6 @@
 <?php
 
-require_once('../assets/conf/conf.inc.php');
+require_once('../admin/conf.inc.php');
 
 if (isset($_POST['num'])) {
     $idRecette = $_POST['num'];
