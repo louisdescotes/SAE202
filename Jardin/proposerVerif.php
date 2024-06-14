@@ -18,8 +18,8 @@ $ownerId = $_SESSION['id'];
 
 $image = '';
 
-if (!empty($_FILES['image']['name'])) {
-    $imageType = $_FILES["image"]["type"];
+if (!empty($_FILES['img']['name'])) {
+    $imageType = $_FILES["img"]["type"];
     if (!in_array($imageType, ['image/png', 'image/jpeg', 'image/jpg'])) {
 
 
@@ -38,9 +38,9 @@ if (!empty($_FILES['image']['name'])) {
         exit();
     }
 
-    $nouvelle_image = date("Y_m_d_H_i_s") . "---" . basename($_FILES["image"]["name"]);
+    $nouvelle_image = date("Y_m_d_H_i_s") . "---" . basename($_FILES["img"]["name"]);
 
-    if (!move_uploaded_file($_FILES["image"]["tmp_name"], "../assets/Uploads/" . $nouvelle_image)) {
+    if (!move_uploaded_file($_FILES["img"]["tmp_name"], "../assets/Uploads/" . $nouvelle_image)) {
         $affichage_retour = '
     <div class="popup w-fit fixed bottom-2.5 right-2.5 cursor-pointer">
         <div class="absolute right-2.5 top-2.5">
@@ -72,7 +72,6 @@ try {
                 "'.$ownerId.'")');
         $req->execute();
 
-    
             header('Location: /Jardin/jardinList.php');
             $affichage_retour = '
             <div class="popup w-fit fixed bottom-2.5 right-2.5 cursor-pointer">

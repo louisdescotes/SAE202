@@ -36,11 +36,6 @@ $req2 = $db->prepare('SELECT * FROM JARDIN');
 $req2->execute();
 $jardins = $req2->fetchAll();
 
-echo '<select id="nomJardin" name="nomJardin">';
-foreach ($jardins as $jardin) {
-    echo '<option value="' . htmlspecialchars($jardin['name']) . '">' . htmlspecialchars($jardin['name']) . '</option>';
-}
-echo '</select>';
 
 echo '<div class="flex flex-col w-max button-primary pointer">';
 echo '<input type="submit" value="Ajouter">';

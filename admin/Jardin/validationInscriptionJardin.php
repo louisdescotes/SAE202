@@ -28,10 +28,19 @@ if (!empty($_FILES['img']['name'])) {
     $image = $nouvelle_image;
 }
 
-$sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId) 
-        VALUES ("'.$jardin_name.'", "'.$jardin_ville.'", "'.$jardin_CP.'", "'.$jardin_adresse.'", '.$jardin_taille.', '.$jardin_max.', "'.$image.'", "'.$jardin_ownerId.'")';
 
-$stmt = $db->query($sql);
+$sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId) 
+    VALUES ("' . $jardin_name . '", "' . $jardin_ville . '", "' . $jardin_CP . '", "' . $jardin_adresse . '", ' . $jardin_taille . ', ' . $jardin_max . ', "' . $image . '", "' . $jardin_ownerId . '")';
+    $stmt = $db->query($sql);
+
+    $idJardin = $db->lastInsertId();
+
+    for ($i = 1; $i < $jardin_max; $i++) {
+        $sql3 = 'INSERT INTO PARCELLE (superficie, jardinId) 
+         VALUES (' . $jardin_taille . ', ' . $idJardin . ')';
+        $stmt3 = $db->query($sql3);
+    }
+    $stmt3->execute();
 
 header('Location: /admin/admin.php');
 ?>

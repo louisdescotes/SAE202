@@ -226,7 +226,7 @@
     $recetteReq->execute();
     $recetteCount = $recetteReq->fetchColumn();
     
-    echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($recetteCount) . '</span>';
+    echo '<span class="row-start-1">Total de recette: ' . htmlspecialchars($recetteCount) . '</span>';
 
     echo '<table class="col-start-1 col-end-9 w-full">';
     echo '<tr class="text-main">';

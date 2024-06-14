@@ -30,11 +30,13 @@ if (!isset($_SESSION['id'])) {
 
         <?php
         try {
-            $req = $db->prepare('SELECT * FROM JARDIN WHERE ownerId = ' . $_SESSION['id']);
+            $req = $db->prepare('SELECT *, COUNT(ownerId) FROM JARDIN
+            INNER JOIN USER ON JARDIN.ownerId = USER.idUser
+            WHERE ownerId = ' . $_SESSION['id']);
             $req->execute();
             $parcelles = $req->fetchAll();
 
-            if ($parcelles) {
+            if (empty($parcelles)) {
                 foreach ($parcelles as $parcelle) {
                     echo '<div class="col-span-2 relative mb-24">';
                     echo '<div class="bg-cream p-16">';
@@ -50,7 +52,7 @@ if (!isset($_SESSION['id'])) {
 
                     echo '<div class="flex flex-col mb-2">';
                     echo '<p>' . htmlspecialchars($parcelle['taille']) . 'm²</p>';
-                    echo '<p>Parcelles disponibles: ' . htmlspecialchars($parcelle['taille']) . '/' . htmlspecialchars($parcelle['max']) . '</p>';
+                    echo '<p>Parcelle utilisé: ' . htmlspecialchars($parcelle['ownerId']) . '/' . htmlspecialchars($parcelle['max']) . '</p>';
                     echo '</div>';
 
                     echo '
@@ -101,12 +103,17 @@ if (!isset($_SESSION['id'])) {
                     echo '<p class="text-xl text-main satoshi-medium">' . htmlspecialchars($parcelle['jardinName']) . '</p>';
                     echo '</div>';
                     echo '<div class="flex justify-between mb-2">';
-                    echo '<p class="satoshi-light">' . htmlspecialchars($parcelle['ville']) . ' - ' . htmlspecialchars($parcelle['adresse']) . ' - ' . htmlspecialchars($parcelle['CP']) . '</p>';
+                    echo '<p class="satoshi-light">' . htmlspecialchars($parcelle['ville']) . ' - ' . htmlspecialchars($parcelle['CP']) . ' - ' . htmlspecialchars($parcelle['adresse']) . '</p>';
                     echo '</div>';
                     echo '<div class="flex flex-col mb-2">';
                     echo '<p>' . htmlspecialchars($parcelle['superficie']) . 'm²</p>';
                     echo '</div>';
                     echo '</div>';
+
+                    echo '<form action="/User/supprimerParcelle.php" method="POST">';
+                    echo '<input type="hidden" name="num" value="' . htmlspecialchars($parcelle['idParcelle']) . '">';
+                    echo '<input class="button-tercery" type="submit" value="Supprimer">';
+                    echo '</form>';
                 }
             } else {
                 echo '<span>Vous n\'avez aucune parcelle.</span>';

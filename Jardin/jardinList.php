@@ -8,13 +8,15 @@ require_once('../assets/conf/header.inc.php');
 
 <?php
 try {
-    $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.ownerId, JARDIN.name AS jardinName, JARDIN.ville, JARDIN.CP, JARDIN.adresse, JARDIN.taille, JARDIN.max, JARDIN.img, USER.name AS userName, USER.forname AS userForname, USER.email AS userEmail, COUNT(PARCELLE.idParcelle) AS countParcelles
-        FROM JARDIN 
-        INNER JOIN USER 
-        ON JARDIN.ownerId = USER.idUser
-        LEFT JOIN PARCELLE
-        ON PARCELLE.jardinId = JARDIN.idJardin
-        GROUP BY JARDIN.idJardin');
+    $req = $db->prepare('SELECT JARDIN.idJardin, JARDIN.ownerId, JARDIN.name AS jardinName, JARDIN.ville, JARDIN.CP, JARDIN.adresse, JARDIN.taille, JARDIN.max, JARDIN.img, 
+                                USER.name AS userName, USER.forname AS userForname, USER.email AS userEmail, 
+                                COUNT(PARCELLE.occupantId) AS countParcelles, PARCELLE.occupantId
+                                FROM JARDIN 
+                                INNER JOIN USER 
+                                ON JARDIN.ownerId = USER.idUser
+                                LEFT JOIN PARCELLE
+                                ON PARCELLE.jardinId = JARDIN.idJardin
+                                GROUP BY JARDIN.idJardin');
     $req->execute();
     $jardins = $req->fetchAll();
 
@@ -22,12 +24,12 @@ try {
         echo '<a class="relative top-5 my-5 mx-5 button-primary" href="/Jardin/proposerJardin.php">Proposer un jardin</a>';
     }
     ?>
-    <form class="relative left-52" action="./User/resultatRechercheJardin.php" method="post">
-<input type="text" name="texte" placeholder="Nom du jardin">
-<button type="submit" >Rechercher</button>
-</form>
+    <form class="relative left-52" action="/User/resultatRechercheJardin.php" method="post">
+        <input type="text" name="texte" placeholder="Nom du jardin">
+        <button type="submit">Rechercher</button>
+    </form>
     <div class="flex w-full items-center h-content justify-end -mx-5 gap-2">
-        <input type="checkbox" name="show" id="show" >
+        <input type="checkbox" name="show" id="show">
         <label for="show">Afficher les jardins non disponibles</label>
     </div>
     </div>
@@ -56,11 +58,11 @@ try {
 
             echo '<div class="flex flex-col mb-2">';
                 echo '<p>' . htmlspecialchars($jardin['taille']) . 'm²</p>';
-                echo '<p>Parcelles disponibles: ' . htmlspecialchars($jardin['countParcelles']) . '/' . htmlspecialchars($jardin['max']) . '</p>';
+                echo '<p>Parcelles occupées : ' . htmlspecialchars($jardin['countParcelles']) . '/' . htmlspecialchars($jardin['max']) . '</p>';
             echo '</div>';
 
             if (!empty($_SESSION['id'])) {
-                if ($jardin['countParcelles'] >= $jardin['max'] && $jardin['ownerId'] != $_SESSION['id']) {
+                if ($jardin['countParcelles'] < $jardin['max'] && $jardin['ownerId'] != $_SESSION['id'] && $jardin['occupantId'] != $_SESSION['id']) {
                     echo '<a class="button-primary" href="rejoindreJardin.php?idJardin=' . htmlspecialchars($jardin['idJardin']) . '&idUser=' . htmlspecialchars($_SESSION['id']) . '">Rejoindre</a>';
                 } else {
                     echo '<span class="parcelle-full">Parcelles pleines</span>';
@@ -80,13 +82,12 @@ try {
 <?php
 require_once('../assets/conf/footer.inc.php');
 ?>
-    <?php
-    if(isset($_SESSION['information'])) {
-        echo '<p>' . $_SESSION['information'] . '</p>';
-        unset($_SESSION['information']);
-    }
-    ?>
-            <script src="/assets/js/popupDelete.js"></script>
-
+<?php
+if(isset($_SESSION['information'])) {
+    echo '<p>' . $_SESSION['information'] . '</p>';
+    unset($_SESSION['information']);
+}
+?>
+<script src="/assets/js/popupDelete.js"></script>
 <script src="/assets/js/jardin.js"></script>
 </body>

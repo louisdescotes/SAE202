@@ -8,7 +8,6 @@ $affichage_retour = '';
 
 $nomRecette = $_POST['nomRecette'];
 $descriptionRecette = $_POST['descriptionRecette'];
-$idJardin = $_POST['nomJardin']; 
 $creatorId = $_SESSION['id'];
 $plantes = isset($_POST['planteCheckbox']) ? $_POST['planteCheckbox'] : [];
 
@@ -66,7 +65,7 @@ $req->execute(array(
 $lastRecetteId = $db->lastInsertId();
 
 try {
-    if(!empty($nomRecette) && !empty($descriptionRecette) && !empty($idJardin) && !empty($creatorId) && !empty($plantes)) {
+    if(!empty($nomRecette) && !empty($descriptionRecette) && !empty($creatorId) && !empty($plantes)) {
         foreach ($plantes as $planteId) {
         $req2 = $db->prepare('INSERT INTO RECETTE_PLANTE (idRecette, idPlante) VALUES (:idRecette, :idPlante)');
         $req2->execute(array(

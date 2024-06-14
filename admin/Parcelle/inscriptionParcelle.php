@@ -21,13 +21,14 @@ echo '</div>';
 echo '<div class="flex flex-col w-max">
         <label for="OccupantId">OccupantId</label>';
 
-$req2 = $db->prepare('SELECT USER.idUser, USER.name as userName FROM USER');
+$req2 = $db->prepare('SELECT USER.idUser, USER.name as userName, USER.forname FROM USER');
 $req2->execute();
 $occupants = $req2->fetchAll();
 
 echo '<select id="OccupantId" name="OccupantId">';
+echo '<option value="" disabled selected></option>';
 foreach ($occupants as $occupant) {
-    echo '<option value="' . htmlspecialchars($occupant['idUser']) . '">' . htmlspecialchars($occupant['userName']) . '</option>';
+    echo '<option value="' . htmlspecialchars($occupant['idUser']) . '">' . htmlspecialchars($occupant['userName']) . ' ' .  htmlspecialchars($occupant['userName']) . '</option>';
 }
 echo '</select>';
 echo '</div>';

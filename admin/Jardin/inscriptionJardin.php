@@ -18,7 +18,7 @@ echo '<div class="flex flex-col w-max">
         <input type="text" id="adresse" name="adresse" placeholder="adresse">
       </div>';
 echo '<div class="flex flex-col w-max">
-        <label for="taille">Taille m2</label>
+        <label for="taille">Taille du jardin (m2)</label>
         <input type="number" id="taille" name="taille" placeholder="taille">
       </div>';
 echo '<div class="flex flex-col w-max">
@@ -32,14 +32,15 @@ echo '<div class="flex flex-col w-max">
 
 echo '<div class="flex flex-col w-max">
         <label for="ownerId">OwnerId</label>';
-
-        $req2 = $db->prepare('SELECT JARDIN.ownerId, USER.name as userName FROM JARDIN INNER JOIN USER ON JARDIN.ownerId = USER.idUser');
+        $req2 = $db->prepare('SELECT * FROM USER');
         $req2->execute();
         $owners = $req2->fetchAll();
-
+    
         echo '<select id="ownerId" name="ownerId">';
+        echo '<option value="" disabled selected></option>';
+    
         foreach ($owners as $owner) {
-            echo '<option value="' . htmlspecialchars($owner['ownerId']) . '">' . htmlspecialchars($owner['name']) . '</option>';
+            echo '<option value="' . htmlspecialchars($owner['idUser']) . '">' . htmlspecialchars($owner['name']) . ' ' . htmlspecialchars($owner['forname']) . '</option>';
         }
         echo '</select>';
 
