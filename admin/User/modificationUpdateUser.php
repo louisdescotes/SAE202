@@ -7,7 +7,7 @@ $user_mdp = $_POST['password'];
 
 if(!empty($user_nom) && !empty($user_prenom) && !empty($user_email) && !empty($user_mdp)) {
 
-    require_once('../../admin/conf.inc.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
     $req = $db->query('UPDATE USER SET name = "'.$user_nom.'", forname = "'.$user_prenom.'", email = "'.$user_email.'", password = "'.$user_mdp.'" WHERE idUser = '.$user_id.';');  
     header('Location: /admin/admin.php');
 }

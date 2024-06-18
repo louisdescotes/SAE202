@@ -1,5 +1,5 @@
 <?php
-require_once('../../admin/conf.inc.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
 $planteName = htmlspecialchars($_POST['name']);
 $typePlanteId = htmlspecialchars($_POST['typePlanteId']);
 $image = '';

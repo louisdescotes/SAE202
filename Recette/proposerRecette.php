@@ -6,13 +6,13 @@ require_once('../assets/conf/header.inc.php');
 
 echo '<form action="/Recette/updateProposerRecette.php" method="post" enctype="multipart/form-data">';
 echo '<div class="flex flex-col w-max">';
-echo '<label for="nomRecette">nomRecette</label>';
-echo '<input type="text" id="nomRecette" name="nomRecette" placeholder="Nom">';
+echo '<label class="text-main satoshi-medium text-sm" for="nomRecette">nomRecette</label>';
+echo '<input class="input" type="text" id="nomRecette" name="nomRecette" placeholder="Nom">';
 echo '</div>';
 
 echo '<div class="flex flex-col w-max">';
-echo '<label for="descriptionRecette">descriptionRecette</label>';
-echo '<input type="text" id="descriptionRecette" name="descriptionRecette" placeholder="Description">';
+echo '<label class="text-main satoshi-medium text-sm" for="descriptionRecette">descriptionRecette</label>';
+echo '<input class="input" type="text" id="descriptionRecette" name="descriptionRecette" placeholder="Description">';
 echo '</div>';
 
 echo '<div class="flex flex-col w-max">';

@@ -3,28 +3,29 @@
     /**
      * Connexion à la base de données
      */
-    require_once('../assets/conf/head.inc.php');
-    require_once('../admin/conf.inc.php');
-    require_once('../assets/conf/header.inc.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/head.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/header.inc.php';
+    
 
     // require_once('../assets/conf/grid.inc.php');
 ?>
 <div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
-    <div class="col-start-1 col-end-9 row-start-1">
+    <div class="col-start-1 col-end-9 row-start-1 flex sm:block gap-2 flex-col">
     <button class="view-button button-secondary" data-view="Users" onclick="setView('Users')">Users</button>
     <button class=" view-button button-primary" data-view="Jardins" onclick="setView('Jardins')">Jardins</button>
     <button class=" view-button button-primary" data-view="Parcelles" onclick="setView('Parcelles')">Parcelles</button>
     <button class=" view-button button-primary" data-view="Plantes" onclick="setView('Plantes')">Plantes</button>
     <button class=" view-button button-primary" data-view="Type_Plante" onclick="setView('Type_Plante')">Type Plante</button>
-    <button class=" view-button button-primary" data-view="Recette" onclick="setView('Recette')">Recettes</button>
+    <button class=" view-button button-primary" data-view="RecetteAd" onclick="setView('RecetteAd')">Recettes</button>
     </div>
-    <div class="col-start-8 col-end-9 row-start-1 text-end">
+    <div class="col-start-1 row-start-2 flex flex-col w-full sm:col-start-8 col-end-9 sm:row-start-1 text-end">
     <button class=" view-button button-tercery" data-view="Demandes" onclick="setView('Demande')">Demandes</button>
     </div>
 </div>
 
 
-<div class="view Users grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Users flex flex-col gap-5 mx-5 overflow-hidden">
 <?php
     /**
      * Affichage des données de la table USER
@@ -38,8 +39,8 @@
     
     echo '<span class="row-start-2">Total de users: ' . htmlspecialchars($userCount) . '</span>';
 
-
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<div class="w-full h-full overflow-scroll">';
+    echo '<table class="col-start-1 border-collapse overflow-x-auto col-end-9 w-full">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idUser</th>';
     echo '<th class="text-start">name</th>';
@@ -59,10 +60,11 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
 ?>
 </div>
 
-<div class="view Jardins grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Jardins flex flex-col gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table JARDIN
@@ -77,7 +79,8 @@
     echo '<span class="row-start-2">Total de jardins: ' . htmlspecialchars($jardinCount) . '</span>';
      
     $req = $db->query("SELECT * FROM JARDIN;");
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<div class="w-full h-full overflow-scroll">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idJardin</th>';
     echo '<th class="text-start">name</th>';
@@ -105,10 +108,11 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
     ?>
 </div>
 
-<div class="view Parcelles grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Parcelles flex flex-col gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table PARCELLE
@@ -124,7 +128,8 @@
 
     $req = $db->query(" SELECT * FROM PARCELLE
 ;");
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<div class="w-full h-full overflow-scroll">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idParcelle</th>';
     echo '<th class="text-start">superficie</th>';
@@ -142,10 +147,11 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
     ?>
 </div>
 
-<div class="view Plantes grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Plantes flex flex-col gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table PLANTE
@@ -158,9 +164,9 @@
     $planteCount = $planteReq->fetchColumn();
     
     echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($planteCount) . '</span>';
-
+    echo '<div class="w-full h-full overflow-scroll">';
     $req = $db->query("SELECT * FROM PLANTE;");
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idPlante</th>';
     echo '<th class="text-start">name</th>';
@@ -178,10 +184,11 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
     ?>
 </div>
 
-<div class="view Type_Plante grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-5 mx-5">
+<div class="view Type_Plante flex flex-col  gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table TYPE_PLANTE
@@ -195,9 +202,9 @@
      $typePlanteCount = $typePlanteReq->fetchColumn();
      
      echo '<span class="row-start-2">Total de plantes: ' . htmlspecialchars($typePlanteCount) . '</span>';
-
+     echo '<div class="w-full h-full overflow-scroll">';
     $req = $db->query("SELECT * FROM TYPE_PLANTE;");
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idTypePlante</th>';
     echo '<th class="text-start">typeName</th>';
@@ -213,10 +220,11 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
     ?>
 </div>
 
-<div class="view Recette grid my-10 grid-cols-9 gap-5 mx-5">
+<div class="view RecetteAd flex flex-col my-10 gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table RECETTE
@@ -227,8 +235,8 @@
     $recetteCount = $recetteReq->fetchColumn();
     
     echo '<span class="row-start-1">Total de recette: ' . htmlspecialchars($recetteCount) . '</span>';
-
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<div class="w-full h-full overflow-scroll">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">idRecette</th>';
     echo '<th class="text-start">name</th>';
@@ -244,16 +252,18 @@
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
     ?>
 </div>
 
-<div class="view Demande grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
+<div class="view Demande flex flex-col  gap-5 mx-5 overflow-hidden">
     <?php
     /**
      * Affichage des données de la table RESERVATION
      */
     $req = $db->query("SELECT * FROM RESERVATION;");
-    echo '<table class="col-start-1 col-end-9 w-full">';
+    echo '<div class="w-full h-full overflow-scroll">';
+    echo '<table class="col-start-1 col-end-9 w-full border-collapse overflow-x-auto">';
     echo '<tr class="text-main">';
     echo '<th class="text-start">ReservationId</th>';
     echo '<th class="text-start">nomJardin</th>';
@@ -279,7 +289,7 @@
         echo '<td class="">'.$rep['imgJardin'].'</td>';
         echo '<td class="">'.$rep['_idUser'].'</td>';
 
-        echo '<form action="/Admin/Demande/reservationAccepte.php" class="button-primary" method="post" enctype="multipart/form-data">';
+        echo '<form action="/admin/Demande/reservationAccepte.php" class="button-primary" method="post" enctype="multipart/form-data">';
         echo '<input class="hidden" type="text" id="ReservationId" name="ReservationId"  value="'. $rep['ReservationId'] .'">';
         echo '<input class="hidden" type="text" id="nameJardin" name="nameJardin"  value="'. $rep['nameJardin'] .'">';
         echo '<input class="hidden" type="text" id="villeJardin" name="villeJardin"  value="'. $rep['villeJardin'] .'">';
@@ -292,7 +302,7 @@
         echo '<td><input class="button-primary" type="submit" value="Accepter"></td>';
         echo '</form>';
 
-        echo '<form action="/Admin/Demande/reservationRefuse.php" class="button-primary" method="post">';
+        echo '<form action="/admin/Demande/reservationRefuse.php" class="button-primary" method="post">';
         echo '<input class="hidden" type="text" id="Res rvationId" name="ReservationId"  value="'. $rep['ReservationId'] .'">';
         echo '<input class="hidden" type="text" id="nameJardin" name="nameJardin"  value="'. $rep['nameJardin'] .'">';
         echo '<input class="hidden" type="text" id="villeJardin" name="villeJardin"  value="'. $rep['villeJardin'] .'">';
@@ -304,7 +314,7 @@
         echo '<input class="hidden" type="text" id="_idUser" name="_idUser" value="'. $rep['_idUser'] .'">';
         echo '<td class="button"><input class="button-tercery" type="submit" value="Refuser"></td>';
         echo '</form>';
-        
+        echo '</div>';
 
         // <form action="/Admin/Demande/reservationRefuse.php" class="button-tercery></form>
 

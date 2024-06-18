@@ -6,7 +6,7 @@ $parcelle_occupantId = $_POST['occupantId'];
 
 if(!empty($parcelle_id) && !empty($parcelle_superficie) && !empty($parcelle_jardinId) && !empty($parcelle_occupantId)) {
 
-    require_once('../../admin/conf.inc.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';    
     
     $req = $db->query('UPDATE PARCELLE SET superficie = "'.$parcelle_superficie.'", jardinId = "'.$parcelle_jardinId.'", occupantId = "'.$parcelle_occupantId.'" WHERE idParcelle = '.$parcelle_id.';');  
     header('Location: /admin/admin.php');

@@ -2,8 +2,9 @@
     /**
      * Connexion à la base de données
      */
-    require_once('../../admin/conf.inc.php');
-
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/head.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/header.inc.php';    
     
     if (isset($_GET['num'])) {
         $parcelle_modifcation = $_GET['num'];
@@ -15,10 +16,21 @@
                 $rep = $req->fetch();
                 echo '<form action="/admin/Parcelle/modificationUpdateParcelle.php" method="post">';
                 echo '<input type="hidden" name="idParcelle" value="'.$rep['idParcelle'].'">';
-                echo '<input type="text" name="superficie" value="'.$rep['superficie'].'">';
-                echo '<input type="int" name="jardinId" value="'.$rep['jardinId'].'">';
-                echo '<input type="int" name="occupantId" value="'.$rep['occupantId'].'">';
-                echo '<input type="submit" value="modifier">';
+
+                echo '<div class="flex flex-col w-max">';
+                echo '<label class="text-main satoshi-medium text-sm" for="superficie">Superficie</label>';
+                echo '<input class="input" type="text" name="superficie" value="'.$rep['superficie'].'">';
+                echo '</div>';
+                echo '<div class="flex flex-col w-max">';
+                echo '<label class="text-main satoshi-medium text-sm" for="jardinId">JardinId</label>';
+                echo '<input class="input" type="int" name="jardinId" value="'.$rep['jardinId'].'">';
+                echo '</div>';
+                echo '<div class="flex flex-col w-max">';
+                echo '<label class="text-main satoshi-medium text-sm" for="occupantId">OccupantId</label>';
+                echo '<input class="input" type="int" name="occupantId" value="'.$rep['occupantId'].'">';
+                echo '</div>';
+
+                echo '<input class="button-primary text-sm" type="submit" value="modifier">';
                 echo '</form>';
                 
             } else {

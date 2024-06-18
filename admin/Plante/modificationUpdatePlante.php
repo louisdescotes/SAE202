@@ -26,7 +26,7 @@ if (!empty($_FILES['img']['name'])) {
 
 if(!empty($idPlante) && !empty($name) && !empty($typePlanteId)) {
 
-    require_once('../../assets/conf/conf.inc.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';    
 
     
     $req = $db->query('UPDATE PLANTE SET name = "'.$name.'", img ="'.$image.'",typePlanteId = "'.$typePlanteId.'" WHERE idPlante = '.$idPlante.';');  

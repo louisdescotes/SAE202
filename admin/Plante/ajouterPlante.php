@@ -1,11 +1,15 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/head.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/conf/header.inc.php';
+
 echo '<form action="/admin/Plante/confirmationPlante.php" method="post" enctype="multipart/form-data">';
 echo '<div class="flex flex-col w-max">
-        <label for="name">Nom</label>
-        <input type="text" id="name" name="name" placeholder="nom">
+        <label class="text-main satoshi-medium text-sm" for="name">Nom</label>
+        <input class="input" type="text" id="name" name="name" placeholder="nom">
       </div>';
 echo '<div class="flex flex-col w-max">
-        <label for="typePlanteId">Type de Plante</label>';
+        <label class="text-main satoshi-medium text-sm" for="typePlanteId">Type de Plante</label>';
 
 $req2 = $db->prepare('SELECT idTypePlante, typeName as typePlanteName, origineName  FROM TYPE_PLANTE');
 $req2->execute();
@@ -18,11 +22,11 @@ foreach ($typePlantes as $typePlante) {
 echo '</select>';
 echo '</div>';
 echo '<div class="flex flex-col w-max">
-        <label for="img">Image</label>
-        <input type="file" id="img" name="img" placeholder="img">
+        <label class="text-main satoshi-medium text-sm" for="Image">Image</label>
+        <input class="" type="file" id="img" name="img" placeholder="img">
       </div>';
-echo '<div class="flex flex-col w-max button-primary pointer">
-        <input type="submit" value="Ajouter">
+echo '<div class="flex flex-col w-max pointer">
+        <input class="button-primary" type="submit" value="Ajouter">
       </div>';
 echo '</form>';
 ?>

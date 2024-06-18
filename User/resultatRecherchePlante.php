@@ -19,29 +19,26 @@ if (isset($_POST['texte']) && !empty($_POST['texte'])) {
     $req->execute();
     $plantes = $req->fetchAll();
 
-    echo '<div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">';
-    echo '<p class="col-span-2">Voici les résultats pour : ' . $nom . '</p>';
-    echo '<form class="col-span-2 row-start-2" action="/User/resultatRecherchePlante.php" method="post">';
-    echo '<input type="text" name="texte" placeholder="Nom de la plante">';
-    echo '<button type="submit">Rechercher</button>';
-    echo '</form>';
-
+    echo '<div class="form-plante">';
+    echo '<form class="recherche-plante" action="/User/resultatRecherchePlante.php" method="post">
+    <input type="text" name="texte" placeholder="Que recherchez-vous ?">
+    <button type="submit"><span class="material-symbols-outlined">search</span></button>';
+    echo '</div>';
+    echo '<h2 class="rph2">Voici les résultats</h2>';
+echo '<h2 class="plante-h2 bambino">Guides des plantes</h2>';
+echo '<div class="plantes">';
     foreach ($plantes as $plante) {
-        echo '<article class="row-start-3 col-span-2 border">';
-        echo '<figure class="plante-image">';
+        echo '<figure class="plante">';
         echo '<img src="/assets/Uploads/' . htmlspecialchars($plante['img']) . '" alt="' . htmlspecialchars($plante['img']) . '">';
-        echo '</figure>';
         echo '<div class="plante-infos">';
-        echo '<div class="type-plante">';
-        echo '<h1>Nom : ' . htmlspecialchars($plante['planteName']) . '</h1>';
-        echo '</div>';
+        echo '<h1 class="satoshi-bold">Nom : ' . htmlspecialchars($plante['planteName']) . '</h1>';
         echo '<h2>Type : ' . htmlspecialchars($plante['typeName']) . '</h2>';
         echo '<h3>Origine : ' . htmlspecialchars($plante['origineName']) . '</h3>';
         echo '</div>';
-        echo '</article>';
-    }   
+        echo '</figure>';
+    }
     echo '</div>';
 }
 
-require_once('../assets/conf/footer.inc.php');
+
 ?>

@@ -25,36 +25,56 @@ try {
         $recettes = $req->fetchAll();
 ?>
 
-        <div class="satoshi-regular h-min grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
-        <form class="col-start-1 col-end-8 " action="/User/resultatRechercheRecette.php" method="post">
-        <input type="text" name="texte" placeholder="Nom de la recette">
-        <button type="submit" >Rechercher</button>
-            <div class="grid grid-cols-9 gap-5 col-start-1 col-end-9 row-start-1 border-main border-b-2">
-                <span class="col-start-1 col-end-5 bambino text-xl">Titre</span>
-                <span class="col-start-5 col-end-8 bambino text-xl">Créateur</span>
-            </div>
+
+
+<div class="form-recette">
+        <h2 class="bambino">Recettes</h2>
+        <h2 class="rph2">Voici les résultats</h2>
+        <?php
+                if (!empty($_SESSION['id'])) {
+                    echo '<a class="relative left-10 button-primary" href="/Recette/proposerRecette.php">Proposer une recette</a>';
+                }
+        ?>
+        <form class="recherche-recette" action="/User/resultatRechercheRecette.php" method="post">
+            <input type="text" name="texte" placeholder="Que recherchez-vous ?">
+            <button type="submit"><span class="material-symbols-outlined">search</span></button>
+        </form>
+    </div>
+    
+    <div class="mx-6 my-10 grid grid-cols-1 sm:grid-cols-4 grid-rows-auto grid-row-gap gap-16 mb-24 relative h-full">
         <?php
         foreach ($recettes as $recette) {
-            echo '<div class="open_menu relative border-main border-b grid grid-cols-9 gap-5 row-span-2 col-start-1 col-end-9 pb-4">';
-            echo '<span class="col-start-1 col-end-5">' . htmlspecialchars($recette['recetteName']) . '</span>';
-            echo '<span class="col-start-5 col-end-8">' . htmlspecialchars($recette['userName']) . ' ' . htmlspecialchars($recette['userForname']) . '</span>';
-            echo '<span class="cross_menu col-start-9 col-end-10 text-end">+</span>';
-
-            echo '<div class="recette_menu active col-start-1 col-end-9 grid grid-cols-9 gap-5">';
-            echo '<img class="object-cover h-full w-full col-start-1 col-end-3 row-span-8" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="' . htmlspecialchars($recette['recetteName']) . '">';
-            echo '<span class="col-start-3 col-end-7">' . htmlspecialchars($recette['description']) . '</span>';
-            echo '<div class="col-start-8 col-end-10 flex flex-col">';
-            echo '<span class="satoshi-bold">Plantes</span>';
-            $plantes = explode('|', $recette['plantes']);
-            foreach ($plantes as $plante) {
-                echo '<span class="w-full">' . htmlspecialchars($plante) . '</span>';
-            }
+            echo '<div class="parcelle h-full parcelle-container">'; 
+                echo '<div class="w-full h-[40%]">';
+                    echo '<img class="object-cover w-full h-full" src="/assets/Uploads/' . htmlspecialchars($recette['img']) . '" alt="' . htmlspecialchars($recette['recetteName']) . '">';
+                echo '</div>';
+                echo '<div class="parcelle-infos">';
+                    echo '<div class="parcelle-infos-1>';
+                        echo '<h2 class="satoshi-bold text-2xl">' . htmlspecialchars($recette['recetteName']) . '</h2>';
+                        echo '<h3 class="text-xl">' . htmlspecialchars($recette['userName']) . ' ' . htmlspecialchars($recette['userForname']) . '</h3>';
+                    echo '</div>';
+                    echo '<div class="parcelle-infos-2">';
+                        echo '<h4 class="satoshi-medium text-xl">Plantes</h4>';
+                        $plantes = explode('|', $recette['plantes']);
+                        foreach ($plantes as $plante) {
+                            echo '<h5 class="flex flex-col text-s w-full">' . htmlspecialchars($plante) . '</h5>';
+                        }
+                    echo '</div>';
+                    echo '<div class="parcelle-infos-3">';
+                        echo '<p>' . htmlspecialchars($recette['description']) . '</p>';
+                    echo '</div>';
+                echo '</div>';
             echo '</div>';
-            echo '</div>';
-            echo '</div>';
-        } 
+        }
         ?>
-        </div>
+    </div>
+    <?php
+    if(isset($_SESSION['information'])) {
+        echo '<p>' . $_SESSION['information'] . '</p>';
+        unset($_SESSION['information']);
+    }
+    ?>
+</div>
 
 <?php
     } else {
@@ -63,5 +83,5 @@ try {
 } catch (PDOException $e) {
     echo 'Erreur: ' . $e->getMessage();
 }
-require_once('../assets/conf/footer.inc.php');
+
 ?>

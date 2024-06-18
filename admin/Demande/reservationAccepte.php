@@ -13,7 +13,8 @@ $max = htmlspecialchars($_POST['maxJardin']);
 $img = htmlspecialchars($_POST['imgJardin']);
 $_idUser = htmlspecialchars($_POST['_idUser']);
 
-require_once('../../admin/conf.inc.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
+
 try {
     $sql = 'INSERT INTO JARDIN (name, ville, CP, adresse, taille, max, img, ownerId) 
     VALUES ("' . $nom . '", "' . $ville . '", "' . $CP . '", "' . $adresse . '", ' . $taille . ', ' . $max . ', "' . $img . '", "' . $_idUser . '")';

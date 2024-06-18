@@ -1,6 +1,7 @@
 <?php
 
-require_once('../../admin/conf.inc.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
+
 if (isset($_GET['num'])) {
     $idRecette = $_GET['num'];
 

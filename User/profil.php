@@ -16,7 +16,7 @@ if (!isset($_SESSION['id'])) {
     <div class="grid grid-cols-2 my-10 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-5 mx-5">
         <p class="text-3xl col-start-1 col-end-8 row-start-1">Bonjour <span class="text-main satoshi-bold"><?php echo htmlspecialchars($_SESSION['nom'] . ' ' . $_SESSION['prenom']); ?></span></p>
         <div class="flex justify-between col-start-1 col-end-8">
-            <div>
+            <div class="flex flex-col gap-2">
                 <button class="view-button button-secondary" data-view="Jardins" data-view="Jardins" onclick="setView('Jardins')">MES JARDINS</button>
                 <button class="view-button button-secondary" data-view="Parcelles" data-view="Parcelles" onclick="setView('Parcelles')">MES PARCELLES</button>
                 <button class="view-button button-secondary" data-view="Recettes" data-view="Recettes" onclick="setView('Recettes')">MES RECETTES</button>
@@ -48,19 +48,19 @@ if (!isset($_SESSION['id'])) {
                     echo '<div class="flex justify-between mb-2">';
                     echo '<p class="text-xl text-main satoshi-medium">' . htmlspecialchars($parcelle['name']) . '</p>';
                     echo '<p class="satoshi-light">' . htmlspecialchars($parcelle['ville']) . ' - ' . htmlspecialchars($parcelle['CP']) . '</p>';
+                    
                     echo '</div>';
 
                     echo '<div class="flex flex-col mb-2">';
                     echo '<p>' . htmlspecialchars($parcelle['taille']) . 'm²</p>';
-                    echo '<p>Parcelle utilisé: ' . htmlspecialchars($parcelle['ownerId']) . '/' . htmlspecialchars($parcelle['max']) . '</p>';
+                    echo '
+                    <form action="/User/supprimerJardin.php" method="POST">
+                        <input type="hidden" name="num" value="' . htmlspecialchars($parcelle['idJardin']) . '">
+                        <input class="button-tercery" type="submit" value="Supprimer">
+                    </form>
+                    ';
                     echo '</div>';
 
-                    echo '
-<form action="/User/supprimerJardin.php" method="POST">
-    <input type="hidden" name="num" value="' . htmlspecialchars($parcelle['idJardin']) . '">
-    <input class="button-tercery" type="submit" value="Supprimer">
-</form>
-';
                     echo '</div>';
                 }
         ?>
@@ -107,13 +107,15 @@ if (!isset($_SESSION['id'])) {
                     echo '</div>';
                     echo '<div class="flex flex-col mb-2">';
                     echo '<p>' . htmlspecialchars($parcelle['superficie']) . 'm²</p>';
-                    echo '</div>';
-                    echo '</div>';
 
                     echo '<form action="/User/supprimerParcelle.php" method="POST">';
                     echo '<input type="hidden" name="num" value="' . htmlspecialchars($parcelle['idParcelle']) . '">';
                     echo '<input class="button-tercery" type="submit" value="Supprimer">';
                     echo '</form>';
+                    echo '</div>';
+                    echo '</div>';
+
+
                 }
             } else {
                 echo '<span>Vous n\'avez aucune parcelle.</span>';
@@ -221,13 +223,13 @@ if (!isset($_SESSION['id'])) {
     </div>
 
     <div>
-    <?php
-    if(isset($_SESSION['information'])) {
-        echo '<p>' . $_SESSION['information'] . '</p>';
-        unset($_SESSION['information']);
-    }
-    ?>
-</div>
+        <?php
+        if (isset($_SESSION['information'])) {
+            echo '<p>' . $_SESSION['information'] . '</p>';
+            unset($_SESSION['information']);
+        }
+        ?>
+    </div>
     <script src="/assets/js/adminPanel.js"></script>
     <script src="/assets/js/popupDelete.js"></script>
 </body>

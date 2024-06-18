@@ -33,8 +33,8 @@ foreach ($occupants as $occupant) {
 echo '</select>';
 echo '</div>';
 
-echo '<div class="flex flex-col w-max button-primary pointer">
-        <input type="submit" value="ajouter">
+echo '<div class="flex flex-col w-max  pointer">
+        <input class="button-primary" type="submit" value="ajouter">
       </div>';
 echo '</form>';
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once('../../admin/conf.inc.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/conf.inc.php';
 $jardin_name = htmlspecialchars($_POST['name']);
 $jardin_ville = htmlspecialchars($_POST['ville']);
 $jardin_CP = htmlspecialchars($_POST['CP']);
